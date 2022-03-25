@@ -31,6 +31,7 @@ public class RestApiController {
     @PutMapping("/put")
     public User put(@RequestBody User user) {
         System.out.println("put method");
+        System.out.println(user);
         return user;
     }
 }
