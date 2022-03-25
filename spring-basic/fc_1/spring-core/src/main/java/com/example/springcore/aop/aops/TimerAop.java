@@ -17,7 +17,7 @@ public class TimerAop {
     @Pointcut("@annotation(com.example.springcore.aop.annotation.Timer)")
     private void enableTimer() {}
 
-    @Around("cut() && enableTimer()")
+    @Around("cut() && enableTimer()") // 메소드 실행 전 후
     public void arround(ProceedingJoinPoint joinPoint) throws Throwable {
 
         StopWatch stopWatch = new StopWatch(); // 시간을 재기위한 StopWatch 클래스
@@ -26,4 +26,7 @@ public class TimerAop {
         stopWatch.stop();
         System.out.println("total time : " + stopWatch.getTotalTimeSeconds());
     }
+    
+    // @AfterThrowing - 메소드 호출 실패 (예외) 시
+    // @After - 메소드 실행 후
 }

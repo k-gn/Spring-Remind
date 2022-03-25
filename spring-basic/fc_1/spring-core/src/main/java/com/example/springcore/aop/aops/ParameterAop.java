@@ -10,16 +10,17 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
-@Aspect // aop로 동작하기 위한 어노테이션션
+@Aspect // aop로 동작하기 위한 어노테이션
 @Component
 public class ParameterAop {
 
     // 접근제한자 패키지명 클래스 메소드 인자
-    // .. : 모든 하위패키지, 모든 인자, * : 모든 클래스 또는 메소드
+    // .. : 모든 하위패키지, 모든 인자 / * : 모든 클래스 또는 메소드
     @Pointcut("execution(* com.example.springcore.aop.controller..*.*(..))") // aop를 적용할 지점
     private void cut() {}
 
-    @Before("cut()")
+    // 적용할 지점에서의 동작
+    @Before("cut()") // 메소드 실행 이전
     public void before(JoinPoint joinPoint) {
 
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
@@ -34,7 +35,7 @@ public class ParameterAop {
         }
     }
 
-    @AfterReturning(value = "cut()", returning = "returnObj")
+    @AfterReturning(value = "cut()", returning = "returnObj") // 메소드 호출 성공 시
     public void afterReturn(JoinPoint joinPoint, Object returnObj) {
         System.out.println("AfterReturn");
         System.out.println(returnObj);

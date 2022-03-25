@@ -26,7 +26,7 @@ public class SpringCoreApplication {
 @Configuration
 class AppConfig {
 
-    @Bean("base64Encode")
+    @Bean("base64Encode") // 해당 이름으로 getBean 가능
     public Encoder encoder(Base64Encoder base64Encoder) {
         return new Encoder(base64Encoder);
     }
