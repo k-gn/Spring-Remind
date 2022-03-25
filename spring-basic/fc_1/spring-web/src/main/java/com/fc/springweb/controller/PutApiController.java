@@ -12,7 +12,7 @@ public class PutApiController {
     public PutRequestDto put(@RequestBody PutRequestDto requestDto, @PathVariable Long userId) {
         System.out.println(requestDto);
         System.out.println(userId);
-        // DTO 에서 지정한 JsonProperty 또는 JsonNaming 에 따라서 Json으로 바껴서 Response가 된다.
+        // DTO 에서 지정한 JsonProperty 또는 JsonNaming 에 따라서 ObjectMapper 로 인해 Json으로 바껴서 Response가 된다.
         return requestDto;
     }
 

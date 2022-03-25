@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 //@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 // @JsonInclude : response 시 포함될 속성을 설정할 수 있다.
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL) // NULL 값은 포함하지 않도록 설정가능
 public class User {
 
     private String name;
@@ -18,9 +18,10 @@ public class User {
 
     }
 
-    public User(String name, int age) {
+    public User(String name, int age, String phoneNumber) {
         this.name = name;
         this.age = age;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getName() {
