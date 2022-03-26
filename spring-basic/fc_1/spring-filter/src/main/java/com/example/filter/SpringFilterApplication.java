@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
-@ServletComponentScan
+@ServletComponentScan // @WebFilter 어노테이션을 읽는다.
 public class SpringFilterApplication {
 
     public static void main(String[] args) {
