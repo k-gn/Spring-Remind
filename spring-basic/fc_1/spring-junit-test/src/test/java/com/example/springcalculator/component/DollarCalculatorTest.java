@@ -38,19 +38,19 @@ public class DollarCalculatorTest {
          일반테스트에서는 @MockBean, @Autowired를 사용할 수 없으므로, @Mock을 사용한다.
      */
 
-    @MockBean
-    private MarketApi marketApi;
+//    @MockBean
+//    private MarketApi marketApi;
 
     @Autowired
     private Calculator dollarCalculator;
 
     @Test
     public void dollarCalculatorTest() {
-        Mockito.when(marketApi.connect()).thenReturn(3000);
+//        Mockito.when(marketApi.connect()).thenReturn(3000);
         
         int sum = dollarCalculator.sum(10, 10);
 
-        Assertions.assertEquals(60000, sum);
+        Assertions.assertEquals(22000, sum);
     }
 
 }
