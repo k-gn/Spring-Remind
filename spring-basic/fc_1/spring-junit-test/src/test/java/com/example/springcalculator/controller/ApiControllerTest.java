@@ -56,7 +56,7 @@ public class ApiControllerTest {
                 MockMvcResultMatchers.status().isOk()
         ).andExpect(
                 MockMvcResultMatchers.content().string("60000")
-        ).andDo(MockMvcResultHandlers.print());
+        ).andDo(MockMvcResultHandlers.print()); // 내용 출력
     }
 
     @Test
