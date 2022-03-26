@@ -22,7 +22,9 @@ public class ApiController {
     })
     @GetMapping("/plus/{x}")
     public int plus(
+//            @ApiParam(value = "x 값")
             @PathVariable int x,
+//            @ApiParam(value = "y 값")
             @RequestParam int y) {
 
         return x + y;
