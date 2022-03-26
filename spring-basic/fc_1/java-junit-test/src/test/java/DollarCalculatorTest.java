@@ -13,10 +13,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 // Mock 객체를 만들고 관리하고 검증 할 수 있는 방법 제공.(가짜 객체를 만들어준다고 생각)
 // 구현체가 아직 없는 경우나, 구현체가 있더라도 특정 단위만 테스트 하고 싶을 경우 주로 사용한다.
 // Mocking 처리 : 특정한 객체를 어떤 메소드가 호출할 때 원하는 결과값을 리턴시키기
+// 가짜 객체를 만들고 가짜 객체의 동작을 개발자가 정하는 것
 @ExtendWith(MockitoExtension.class) // mocking 환경으로 확장
 public class DollarCalculatorTest {
 
-    @Mock // mock 처리할 객체
+    @Mock // mock 처리할 객체 (mock 객체 주입)
     public MarketApi marketApi;
 
     @BeforeEach // test 이전에 실행
@@ -26,7 +27,7 @@ public class DollarCalculatorTest {
         // marketApi.connect()가 일어날 때 내가 원하는 금액을 리턴
         // api를 호출하지 않아도 응답을 지정해줄 수 있다.
         // 이 후엔 내가 만든 메소드들이 내가 기대하는데로 동작하는지 결과를 확인하는 것 -> 단위 테스트
-        Mockito.lenient().when(marketApi.connect()).thenReturn(3000);
+        Mockito.lenient().when(marketApi.connect()).thenReturn(3000); // 동작을 정해주는 작업
     }
 
     @Test
