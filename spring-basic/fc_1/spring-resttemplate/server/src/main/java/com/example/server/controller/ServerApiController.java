@@ -31,7 +31,7 @@ public class ServerApiController {
                 .queryParam("display", 10)
                 .queryParam("start", 1)
                 .queryParam("sort", "random")
-                .encode(Charset.forName("UTF-8"))
+                .encode(StandardCharsets.UTF_8)
                 .build()
                 .toUri();
 
