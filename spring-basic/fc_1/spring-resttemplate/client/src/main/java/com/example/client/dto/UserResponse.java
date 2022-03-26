@@ -1,9 +1,9 @@
-package com.example.server.dto;
+package com.example.client.dto;
 
 import lombok.Data;
 
 @Data
-public class User {
+public class UserResponse {
 
     private String name;
     private int age;
