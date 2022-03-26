@@ -7,7 +7,7 @@ import javax.validation.ConstraintValidatorContext;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-// 검증용 클래스
+// 검증용 클래스 (ConstraintValidator 구현 필수)
 // custom validation
 public class YearMonthValidator implements ConstraintValidator<YearMonth, String> { // custom 어노테이션과 확인할 값을 지정
 
