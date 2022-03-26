@@ -70,8 +70,8 @@ public class ApiControllerTest {
 
         mockMvc.perform(
                 MockMvcRequestBuilders.post("http://localhost:8080/api/minus")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(json)
+                .contentType(MediaType.APPLICATION_JSON) // header
+                .content(json) // body data
         ).andExpect(
                 MockMvcResultMatchers.status().isOk()
         ).andExpect(
