@@ -20,8 +20,8 @@ import org.springframework.data.jpa.repository.Query;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     // 쿼리 메소드
-    // 네이밍 규칙에 맞게 작성
-    // 리턴 타입은 개발자가 정의해준대로 자동으로 변환하여 반환해준다.
+    // 네이밍 규칙에 맞게 작성 (문서에 잘 나와있음)
+    // 리턴 타입은 개발자가 정의해준대로 자동으로 변환하여 반환해준다. (문서에 리턴 타입 잘 나와있음)
     // 쿼리 메소드는 꼭 테스트를 해보자!
     /*
 
@@ -63,7 +63,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findSomethingByEmail(String email);
 
     // 네이밍 오류 시 런타임 에러
+    Long countByName(String name);
+    boolean existsByName(String name);
 
+    // limit
     List<User> findFirst2ByName(String name);
 
     List<User> findTop2ByName(String name);
