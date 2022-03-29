@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.study.springjpa.domain.listener.UserEntityListener;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ import javax.persistence.*;
 @Entity // 자바 객체를 엔티티로 선언, PK가 반드시 필요하다.
 // @Table 엔티티와 매핑할 테이블을 지정, 테이블명, 인덱스, 제약조건 등을 지정해줄 수 있다.
 // @Table(name = "user", indexes = { @Index(columnList = "name")}, uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
+@EntityListeners(value = {UserEntityListener.class}) // 엔티티 리스너 등록
 public class User extends BaseEntity {
 
     @Id // PK 설정

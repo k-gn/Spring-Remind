@@ -1,7 +1,9 @@
 package com.study.springjpa.repository;
 
+import com.study.springjpa.domain.Address;
 import com.study.springjpa.domain.Gender;
 import com.study.springjpa.domain.User;
+import com.study.springjpa.domain.UserHistory;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.data.domain.Sort.Order;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest // spring context loading
@@ -235,5 +238,73 @@ class UserRepositoryTest {
         userRepository.save(user);
 
         userHistoryRepository.findAll().forEach(System.out::println);
+    }
+
+    @Test
+    void userRelationTest() {
+        User user = new User();
+        user.setName("david");
+        user.setEmail("david@fastcampus.com");
+        user.setGender(Gender.MALE);
+        userRepository.save(user); // insert
+
+        user.setName("daniel");
+        userRepository.save(user); // update
+
+        user.setEmail("daniel@fastcampus.com");
+        userRepository.save(user);
+
+//        userHistoryRepository.findAll().forEach(System.out::println);
+
+//        List<UserHistory> result = userHistoryRepository.findByUserId(
+//            userRepository.findByEmail("daniel@fastcampus.com").getId());
+
+        List<UserHistory> result = userRepository.findByEmail("daniel@fastcampus.com").getUserHistories();
+
+        result.forEach(System.out::println);
+
+        System.out.println("UserHistory.getUser() : " + userHistoryRepository.findAll().get(0).getUser());
+    }
+
+    @Test
+    void embedTest() {
+//        userRepository.findAll().forEach(System.out::println);
+//        System.out.println("=========================================");
+        User user = new User();
+        user.setName("steve");
+        user.setHomeAddress(new Address("서울시", "강남구", "강남대로 364 미왕빌딩", "06241"));
+        user.setCompanyAddress(new Address("서울시", "성동구", "성수이로 113 제강빌딩", "04794"));
+
+        userRepository.save(user);
+//        userRepository.findAll().forEach(System.out::println);
+//        userHistoryRepository.findAll().forEach(System.out::println);
+
+        User user1 = new User();
+        user1.setName("joshua");
+        user1.setHomeAddress(null);
+        user1.setCompanyAddress(null);
+
+        userRepository.save(user1);
+
+        User user2 = new User();
+        user2.setName("jordan");
+        user2.setHomeAddress(new Address());
+        user2.setCompanyAddress(new Address());
+
+        userRepository.save(user2);
+
+        // address 값이 그냥 null 로 들어가거나 Address(null, null, null, null) 로 들어가는 두가지 경우가 있다.
+        // 그 이유는 영속성 캐시 때문에,, (실제 db 값은 똑같이 null)
+//        entityManager.clear();
+
+        userRepository.findAll().forEach(System.out::println);
+        userHistoryRepository.findAll().forEach(System.out::println);
+
+        userRepository.findAllRawRecord().forEach(a -> System.out.println(a.values()));
+
+        assertAll(
+                () -> assertThat(userRepository.findById(7L).get().getHomeAddress()).isNull(),
+                () -> assertThat(userRepository.findById(8L).get().getHomeAddress()).isInstanceOf(Address.class)
+        );
     }
 }
