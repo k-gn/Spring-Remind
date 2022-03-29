@@ -1,5 +1,6 @@
 package com.study.springjpa.repository;
 
+import com.study.springjpa.domain.Gender;
 import com.study.springjpa.domain.User;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
@@ -126,19 +127,113 @@ class UserRepositoryTest {
 
         System.out.println("findByNameIn : " + userRepository.findByNameIn(Lists.newArrayList("martin", "dennis")));
 
-        System.out.println("findByNameStartingWith : " + userRepository.findByNameStartingWith("mar"));
-        System.out.println("findByNameEndingWith : " + userRepository.findByNameEndingWith("tin"));
-        System.out.println("findByNameContains : " + userRepository.findByNameContains("art"));
+        System.out.println("findByNameStartingWith : " + userRepository.findByNameStartingWith("mar")); // ~ %
+        System.out.println("findByNameEndingWith : " + userRepository.findByNameEndingWith("tin")); // % ~
+        System.out.println("findByNameContains : " + userRepository.findByNameContains("art")); // % ~ %
 
         System.out.println("findByNameLike : " + userRepository.findByNameLike("%" + "art" + "%")); // % 직접 줘야함
     }
 
     @Test
     void pagingAndSortingTest() {
-//        System.out.println("findTop1ByName : " + userRepository.findTop1ByName("martin"));
-//        System.out.println("findTopByNameOrderByIdDesc : " + userRepository.findTopByNameOrderByIdDesc("martin"));
-//        System.out.println("findFirstByNameOrderByIdDescEmailAsc : " + userRepository.findFirstByNameOrderByIdDescEmailAsc("martin"));
-//        System.out.println("findFirstByNameWithSortParams : " + userRepository.findFirstByName("martin", Sort.by(Order.desc("id"), Order.asc("email"))));
+        System.out.println("findTop1ByName : " + userRepository.findTop1ByName("martin"));
+        System.out.println("findTopByNameOrderByIdDesc : " + userRepository.findTopByNameOrderByIdDesc("martin"));
+        System.out.println("findFirstByNameOrderByIdDescEmailAsc : " + userRepository.findFirstByNameOrderByIdDescEmailAsc("martin"));
+        System.out.println("findFirstByNameWithSortParams : " + userRepository.findFirstByName("martin", Sort.by(Order.desc("id"), Order.asc("email"))));
         System.out.println("findByNameWithPaging : " + userRepository.findByName("martin", PageRequest.of(1, 1, Sort.by(Order.desc("id")))).getTotalElements());
+    }
+
+    @Test
+    void insertAndUpdateTest() {
+        User user = new User();
+        user.setName("martin");
+        user.setEmail("martin2@fastcampus.com");
+
+        userRepository.save(user);
+
+        User user2 = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user2.setName("marrrrrtin");
+
+        userRepository.save(user2);
+    }
+
+    @Test
+    void enumTest() {
+//        User user1 = new User("jack", "jack@jack.com");
+//        User user2 = new User("steve", "steve@steve.com");
+//        User user3 = new User("john", "john@john.com");
+//        userRepository.saveAll(Lists.newArrayList(user1, user2, user3));
+
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user.setGender(Gender.MALE);
+
+        userRepository.save(user);
+
+        // gender 출력 시 ordinal 이여도 자동으로 string 으로 출력됨 ==> jpa 에서 enum 데이터를 가져올 때 Converter 가 동작한다.
+        // 자바 객체화 시 db 데이터와 형식이 다를 경우 Converter 를 통해서 데이터를 가져오는 즉시 정보를 변경해서 핸들링 가능
+        userRepository.findAll().forEach(System.out::println);
+
+        System.out.println(userRepository.findRawRecord().get("gender"));
+//        System.out.println(userRepository.findRawRecord().get("email"));
+    }
+
+    @Test
+    void listenerTest() {
+        User user = new User();
+        user.setEmail("martin2@fastcampus.com");
+        user.setName("martin");
+
+        userRepository.save(user);
+
+        User user2 = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user2.setName("marrrrrtin");
+
+        userRepository.save(user2);
+
+        userRepository.deleteById(4L);
+    }
+
+    @Test
+    void prePersistTest() {
+        User user = new User();
+        user.setEmail("martin2@fastcampus.com");
+        user.setName("martin");
+//        user.setCreatedAt(LocalDateTime.now());
+//        user.setUpdatedAt(LocalDateTime.now());
+
+        userRepository.save(user);
+
+        System.out.println(userRepository.findByEmail("martin2@fastcampus.com"));
+    }
+
+    @Test
+    void preUpdateTest() {
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+
+        System.out.println("as-is : " + user);
+
+        user.setName("martin22");
+        userRepository.save(user);
+
+        System.out.println("to-be : " + user);
+        System.out.println("to-be : " + userRepository.findAll().get(0));
+    }
+
+    @Autowired
+    private UserHistoryRepository userHistoryRepository;
+
+    @Test
+    void userHistoryTest() {
+        User user = new User();
+        user.setEmail("martin-new@fastcampus.com");
+        user.setName("martin-new");
+
+        userRepository.save(user);
+
+        user.setName("martin-new-new");
+
+        userRepository.save(user);
+
+        userHistoryRepository.findAll().forEach(System.out::println);
     }
 }

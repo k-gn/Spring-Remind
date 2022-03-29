@@ -2,6 +2,8 @@ package com.study.springjpa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+
 /*
 - JPA 란?
 	- 자바 진영의 ORM 표준
@@ -40,6 +42,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
     4) 쿼리에 로직을 녹여야 하는데 유지보수 하기가 힘들고 테스트도 까다롭다.
  */
 @SpringBootApplication
+@EnableJpaAuditing
 public class SpringJpaApplication {
 
     public static void main(String[] args) {

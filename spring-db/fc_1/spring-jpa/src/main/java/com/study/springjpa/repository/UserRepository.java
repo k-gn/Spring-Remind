@@ -101,9 +101,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     // NotEmpty : collection properties 에 사용가능, exists 문으로 검색 (잘 안쓴다.)
 //    List<User> findByAddressIsNotEmpty();   // name is not null and name != '' 의미가 아니다.
-    // ...True, ...False
+    // ...True, ...False -> boolean 값 대상으로 사용 가능
 
-    // in
+    // in (list 길이가 길 경우 성능 이슈가 발생할 수 있다.)
     List<User> findByNameIn(List<String> names); // 일반적으로 다른 쿼리의 결과값을 받아 in 절을 처리하는데 쓴다.
 
     // like
@@ -118,13 +118,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // order by
     List<User> findTopByNameOrderByIdDesc(String name);
     List<User> findFirstByNameOrderByIdDescEmailAsc(String name);
-    List<User> findFirstByName(String name, Sort sort);
+    List<User> findFirstByName(String name, Sort sort); // 훨씬 가독성 좋고, 자유도가 높다.
 
     // paging
     // slice : 현재 묶음(부분집합)에 대한 각각의 정보들
     // page : slice + 전체 페이지에대한 정보를 추가 제공
     // -> paging 에 대한 응답값
     // Pageable : paging 에 대한 요청값
+    // 내부적으로 count 쿼리도 같이 실행된다.
     Page<User> findByName(String name, Pageable pageable);
 
     // 네이티브 쿼리
