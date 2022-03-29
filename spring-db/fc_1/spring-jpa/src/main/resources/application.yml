@@ -17,7 +17,7 @@ spring:
         format_sql: true # 예쁘게 보기 위한 포매팅 설정
     generate-ddl: true # 자동으로 엔티티 테이블을 만들어준다.
     hibernate:
-      ddl-auto: update # 초기화 전략, generate-ddl 보다 우선적, schema.sql 을 쓸 경우 무시된다.
+      ddl-auto: create # 초기화 전략, generate-ddl 보다 우선적, schema.sql 을 쓸 경우 무시된다.
       # none: 아무것도 실행하지 않는다 (대부분의 DB에서 기본값이다)
       # create-drop: SessionFactory가 시작될 때 drop및 생성을 실행하고, SessionFactory가 종료될 때 drop을 실행한다 (in-memory DB의 경우 기본값이다)
       # create: SessionFactory가 시작될 때 데이터베이스 drop을 실행하고 생성된 DDL을 실행한다
