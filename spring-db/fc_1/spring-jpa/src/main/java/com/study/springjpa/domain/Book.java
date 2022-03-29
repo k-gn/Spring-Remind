@@ -2,6 +2,8 @@ package com.study.springjpa.domain;
 
 import javax.persistence.*;
 
+import com.study.springjpa.domain.converter.BookStatusConverter;
+import com.study.springjpa.repository.dto.BookStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -31,9 +33,7 @@ public class Book extends BaseEntity {
 
     private String name;
 
-    private String author;
-
-//    private String category;
+    private String category;
 
 //    private Long authorId;
 
@@ -43,32 +43,32 @@ public class Book extends BaseEntity {
     // JPA에서는 두 객체 연관관계 중 하나를 정해서 테이블의 외래키를 관리해야 하는데 이것을 연관관계의 주인이라고 한다.
     // 주인이 아니면 mappedBy 속성을 사용해서 속성의 값으로 연관관계의 주인을 지정
     // 연관관계의 주인은 외래 키가 있는 곳으로 설정
-//    @OneToOne(mappedBy = "book") // mappedBy : 양방향 매핑일 때 사용, 반대쪽 매핑의 필드 이름을 값, 해당 테이블에서 연관키가 사라진다.
-//    @ToString.Exclude // ToString 에서 제외 : 엔티티 릴레이션에서 순환참조를 없애기
-//    private BookReviewInfo bookReviewInfo;
+    @OneToOne(mappedBy = "book") // mappedBy : 양방향 매핑일 때 사용, 반대쪽 매핑의 필드 이름을 값, 해당 테이블에서 연관키가 사라진다.
+    @ToString.Exclude // ToString 에서 제외 : 엔티티 릴레이션에서 순환참조를 없애기
+    private BookReviewInfo bookReviewInfo;
 
     // One 쪽의 PK 를 Many 쪽에서 FK 로 가지고 있다.
-//    @OneToMany
-//    @JoinColumn(name = "book_id")
-//    @ToString.Exclude
-//    private List<Review> reviews = new ArrayList<>();
+    @OneToMany
+    @JoinColumn(name = "book_id")
+    @ToString.Exclude
+    private List<Review> reviews = new ArrayList<>();
 
 
     // 보통 manytoone 쪽에 joincolumn 쓰고 onetomany 쪽에 mappedby 쓰는 것 같다.. (mappedby 도 중간테이블 안만들어줌)
     // 연관관계가 있는 경우 cascade 설정 가능 (Entity의 상태 변화를 전파시키는 옵션)
     // 예를 들어 부모 엔티티를 저장할 때 자식 엔티티도 함께 저장하거나, 부모 엔티티를 삭제할 때 관련된 자식엔티티도 함께 삭제하고 싶을 때 사용
-//    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.LAZY)
-//    private Publisher publisher;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    private Publisher publisher;
 
     //    @ManyToMany
-//    @OneToMany
-//    @JoinColumn(name = "book_id")
-//    @ToString.Exclude
-//    private List<BookAndAuthor> bookAndAuthors = new ArrayList<>();
-//
-//    public void addBookAndAuthors(BookAndAuthor... bookAndAuthors) {
-//        Collections.addAll(this.bookAndAuthors, bookAndAuthors);
-//    }
+    @OneToMany
+    @JoinColumn(name = "book_id")
+    @ToString.Exclude
+    private List<BookAndAuthor> bookAndAuthors = new ArrayList<>();
+
+    public void addBookAndAuthors(BookAndAuthor... bookAndAuthors) {
+        Collections.addAll(this.bookAndAuthors, bookAndAuthors);
+    }
 
     // flag를 활용한 soft delete 방식
     // 데이터 삭제 시 직접 delete 쿼리로 삭제하는 경우가 현업에선 거의 없다.
@@ -76,9 +76,9 @@ public class Book extends BaseEntity {
     // db 상에는 존재하지만 숨겨서 가져오는 방식
     private boolean deleted;
 
-//    private int status; // 판매 상태
-//    @Convert(converter = BookStatusConverter.class) // @Convert : 해당 필드에 적용할 컨버터 클래스 작성
-//    private BookStatus status; // 판매상태
+    //    private int status; // 판매 상태
+    @Convert(converter = BookStatusConverter.class) // @Convert : 해당 필드에 적용할 컨버터 클래스 작성
+    private BookStatus status; // 판매상태
 
 //    public boolean isDisplayed() {
 //        return status == 200;
