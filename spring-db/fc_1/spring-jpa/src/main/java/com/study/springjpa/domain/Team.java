@@ -20,6 +20,6 @@ public class Team {
     private Long id;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "team_id") // 따로 pk 값의 column 을 추가해 같게 할 필요 없음
     private List<Member> memberList;
 }

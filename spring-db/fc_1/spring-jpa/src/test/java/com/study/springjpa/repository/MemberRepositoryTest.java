@@ -22,13 +22,15 @@ class MemberRepositoryTest {
 
     @BeforeEach
     void before() {
+
         Member member = Member.builder()
                 .name("hong")
+//                .team(team)
                 .build();
+
         Team team = Team.builder()
                 .memberList(List.of(member))
                 .build();
-
 
         memberRepository.save(member);
         teamRepository.save(team);

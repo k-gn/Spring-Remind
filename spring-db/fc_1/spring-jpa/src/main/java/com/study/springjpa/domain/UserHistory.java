@@ -24,7 +24,7 @@ public class UserHistory extends BaseEntity {
     private Long id;
 
 //    @Column(name = "user_id", insertable = false, updatable = false), onetomany 쪽에서 지정한 joincolumn 명과 같아야함
-//    private Long userId;
+//    private Long userId; // jpa가 user_id, userId 값 사이에서 못찾을 수 있어서 외래키 컬럼을 명시할 경우 이름을 맞춰주는게 중요
 
     private String name;
 
