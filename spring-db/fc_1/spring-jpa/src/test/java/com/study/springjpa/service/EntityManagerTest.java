@@ -53,11 +53,12 @@ public class EntityManagerTest {
     @Test
     public void cacheTest() {
 
+        // 한 트랜잭션 내에서 조회 하거나 persist 될 경우 캐시에 해당 객체가 들어가고, 해당 캐시에서 가져올 수 있다.
 //        System.out.println(userRepository.findById(1L).get());
 //        System.out.println(userRepository.findById(1L).get());
 //        System.out.println(userRepository.findById(1L).get());
-        System.out.println(userRepository.findByEmail("martin@fastcam.com"));
-        System.out.println(userRepository.findByEmail("martin@fastcam.com"));
+//        System.out.println(userRepository.findByEmail("martin@fastcam.com")); // 직접 만든 메소드는 직관적으로 sql 실행됨
+//        System.out.println(userRepository.findByEmail("martin@fastcam.com"));
 //
         userRepository.deleteById(1L);
 
@@ -86,14 +87,15 @@ public class EntityManagerTest {
 
         // flush 호출, 트랜잭션 완료 후 커밋(test에선 기본적으로 롤백되서 제외), 복잡한 조회조건의 jpql 쿼리 실행 시 -> 영속성 컨텍스트와 DB가 서로 동기화 된다.
 
-//        System.out.println("1 : " + userRepository.findById(1L).get()); // 이땐 아직 db 반영 x
-//        userRepository.flush();
-//        System.out.println("2 : " + userRepository.findById(1L).get());
+        System.out.println("1 : " + userRepository.findById(1L).get()); // 이땐 아직 db 반영 x
+        userRepository.flush();
+        System.out.println("2 : " + userRepository.findById(1L).get());
 
         // 일반적으론 조회 시에 영속성 캐시와 db 데이터를 비교해서 최신값을 사용해야 한다.
         // 이런 경우 영속성 캐시 값을 DB에 모두 반영 후 Select 해서 다시 가져온다.
-        System.out.println(userRepository.findAll());
+        System.out.println(userRepository.findAll()); // 복잡한 조회조건의 jpql 쿼리 실행 -> auto flush
     }
+
 }
 
 // 엔티티 매니저가 영속성 컨텍스트 내에서 엔티티 상태를 변화시켜준다
