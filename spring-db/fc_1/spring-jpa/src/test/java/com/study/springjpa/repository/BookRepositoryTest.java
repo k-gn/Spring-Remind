@@ -57,7 +57,7 @@ public class BookRepositoryTest {
 
 
     @Test
-//    @Transactional
+    @Transactional
     public void cascade() {
         Publisher publisher = new Publisher();
         publisher.setName("FastCampus");
@@ -73,9 +73,9 @@ public class BookRepositoryTest {
 
 
         System.out.println("====================================================2");
-        System.out.println("books : " + bookRepository.findAll());
+//        System.out.println("books : " + bookRepository.findAll());
         System.out.println("====================================================3");
-        System.out.println("publishers : " + publisherRepository.findAll());
+//        System.out.println("publishers : " + publisherRepository.findAll());
         System.out.println("====================================================3");
 
 //        Book book1 = bookRepository.findById(1L).get();
@@ -94,7 +94,7 @@ public class BookRepositoryTest {
         System.out.println("====================================================3");
 
         Book book3 = bookRepository.findById(1L).get();
-        book3.setPublisher(null);
+        book3.setPublisher(null); // 연관관계 제거
         bookRepository.save(book3);
 
         System.out.println("books : " + bookRepository.findAll());
@@ -102,9 +102,29 @@ public class BookRepositoryTest {
     }
 
     @Test
+    @Transactional
     void remove() {
 
+        Publisher publisher = new Publisher();
+        publisher.setName("FastCampus");
+//        publisherRepository.save(publisher); // cascade persist
+
+        System.out.println("==================================================1");
+
+        Book book = new Book();
+        book.setName("JPA CASCADE");
+        book.setPublisher(publisher);
+        publisher.getBooks().add(book);
+        bookRepository.save(book);
+
+//        Book book2 = new Book();
+//        book2.setName("JPA CASCADE 22");
+//        book2.setPublisher(publisher);
+//        publisher.getBooks().add(book2);
+//        bookRepository.save(book2);
+
         bookRepository.deleteById(1L);
+//        publisherRepository.deleteById(1L);
 
         System.out.println(bookRepository.findAll());
         System.out.println("====================================================");

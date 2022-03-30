@@ -25,7 +25,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 //@EntityListeners(value = AuditingEntityListener.class) // EntityListeners - JPA Entity에서 이벤트가 발생할 때마다 특정 로직을 실행
 @DynamicUpdate // 필요한 정보만 업데이트 => 실제 값이 변경된 컬럼으로만 update 쿼리를 만드는 기능
-@Where(clause = "deleted = false") // where 절 추가
+@Where(clause = "deleted = false") // where 조건절 추가 가능
 public class Book extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,7 +57,7 @@ public class Book extends BaseEntity {
     // 보통 manytoone 쪽에 joincolumn 쓰고 onetomany 쪽에 mappedby 쓰는 것 같다.. (mappedby 도 중간테이블 안만들어줌)
     // 연관관계가 있는 경우 cascade 설정 가능 (Entity의 상태 변화를 전파시키는 옵션)
     // 예를 들어 부모 엔티티를 저장할 때 자식 엔티티도 함께 저장하거나, 부모 엔티티를 삭제할 때 관련된 자식엔티티도 함께 삭제하고 싶을 때 사용
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private Publisher publisher;
 
     //    @ManyToMany
