@@ -77,8 +77,8 @@ public class Book extends BaseEntity {
     private boolean deleted;
 
 //    private int status; // 판매 상태
-//    @Convert(converter = BookStatusConverter.class) // @Convert : 해당 필드에 적용할 컨버터 클래스 작성
-//    private BookStatus status; // 판매상태
+    @Convert(converter = BookStatusConverter.class) // @Convert : 해당 필드에 적용할 컨버터 클래스 작성
+    private BookStatus status; // 판매상태
 
 //    public boolean isDisplayed() {
 //        return status == 200;

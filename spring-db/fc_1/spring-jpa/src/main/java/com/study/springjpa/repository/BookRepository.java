@@ -70,6 +70,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     // 말 그대로 db에 sql을 그대로 사용한다.
     // 방언이 자동으로 적용되지 않는다.
     // 다른 모든 설정들을 제외하고 딱 value에 지정한 쿼리가 실행된다.
+    // 엔티티에 @Where 가 적용되지 않음
     // 현업에서는 db를 쓰다가 변경하는 경우가 별로 없다. (단. 기존 db와 테스트용으로 h2 db를 이종으로 쓰는 경우는 있다 -> 이 때 오작동 가능성이 있음)
     // nativeQuery 는 최소한으로 사용하는게 좋다.
     @Query(value = "select * from book", nativeQuery = true)

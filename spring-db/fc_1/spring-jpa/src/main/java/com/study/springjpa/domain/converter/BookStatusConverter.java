@@ -7,7 +7,7 @@ import javax.persistence.Converter;
 
 // 자바 객체와 DB 데이터간의 변환 시 가져오는 즉시 정보를 핸들링 할 수 있는 컨버터 클래스
 // 컨버터는 코드의 가독성을 높여준다.
-//@Converter(autoApply = true) // autoApply = true : 모든 X타입에 자동 적용 (BookStatus 같은 특정 필드타입에만 적용시키는게 안전)
+@Converter(autoApply = true) // autoApply = true : X타입에 자동 적용 (BookStatus 같은 특정 필드타입에만 적용시키는게 안전)
 public class BookStatusConverter implements AttributeConverter<BookStatus, Integer> {
 
     // 서비스에선 조회작업만 하는데도 db 등록 컨버터가 동작한다. ==> 그냥 무조건 둘다 구현하기

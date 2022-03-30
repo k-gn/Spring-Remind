@@ -11,7 +11,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookNameAndCategory {
+public class BookNameAndCategory { // 인터페이스로도 받을 수 있다.
     private String name;
     private String category;
+    
+//    String getName();
+//    String getCategory();
 }

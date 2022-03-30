@@ -190,7 +190,7 @@ public class BookRepositoryTest {
 
         Book book = new Book();
         book.setName("또다른 IT전문서적");
-//        book.setStatus(new BookStatus(200));
+        book.setStatus(new BookStatus(200));
 
         bookRepository.save(book);
         System.out.println("============================================");
