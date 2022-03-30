@@ -22,7 +22,6 @@ import lombok.ToString;
 public class Author extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "aid")
     private Long id;
 
     private String name;
@@ -31,7 +30,7 @@ public class Author extends BaseEntity {
 
     //    @ManyToMany
     @OneToMany
-    @JoinColumn(name = "aid")
+    @JoinColumn(name = "author_id")
     @ToString.Exclude
     private List<BookAndAuthor> bookAndAuthors = new ArrayList<>();
 

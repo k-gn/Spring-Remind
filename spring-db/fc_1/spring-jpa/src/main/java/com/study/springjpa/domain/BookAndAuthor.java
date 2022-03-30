@@ -24,7 +24,7 @@ public class BookAndAuthor extends BaseEntity {
     // 실무에선 ManyToMany 를 안쓴다.
     // ManyToMany -> OneToMany 와 ManyToOne 으로 풀어서 설계
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Book book;
 
     @ManyToOne

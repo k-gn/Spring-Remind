@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @SpringBootTest
 class AuthorRepositoryTest {
     @Autowired
@@ -57,8 +59,11 @@ class AuthorRepositoryTest {
 
 //        System.out.println("authors through book : " + bookRepository.findAll().get(2).getAuthors());
 //        System.out.println("books through author : " + authorRepository.findAll().get(0).getBooks());
+        // 캐시 때문에 쿼리 안날리고 조회한다.
         bookRepository.findAll().get(2).getBookAndAuthors().forEach(o -> System.out.println(o.getAuthor()));
         authorRepository.findAll().get(0).getBookAndAuthors().forEach(o -> System.out.println(o.getBook()));
+
+//        System.out.println(bookRepository.findById(1L).get().getBookAndAuthors());
     }
 
     private Book givenBook(String name) {
