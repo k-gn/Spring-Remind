@@ -29,13 +29,14 @@ public class BookService {
         this.put();
     }
 
+    // 쓰기지연으로 실제 쿼리를 commit 하지 않고 있다가 트랜잭션 완료 시점에 쿼리를 보낸다. (에러 발생 시 롤백)
     // 1
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED) // 무분별하게 전파설정 시 복잡해진다. (제대로 설계해야한다)
     public void put() throws Exception {
         Book book = new Book();
         book.setName("JPA 시작하기");
         bookRepository.save(book);
-        authorService.put();
+        authorService.put(); //  try catch 로 감싸도 롤백은 된다.
 
         throw new Exception("error!!");
     }
@@ -87,5 +88,5 @@ public class BookService {
 // 즉 RuntimeException 또는 Error 일 경우에만 롤백이 된다.
 // checkedException 일 때에도 롤백을 허용하고 싶다면 rollbackFor 속성을 사용한다.
 
-// 2. private 메서드에서 사용할 경우 = 같은 클래스내에서 호출한 경우 트랜잭션 효과가 무시된다.
+// 2. private 메서드에서 사용할 경우 또는 같은 클래스내에서 호출한 경우 트랜잭션 효과가 무시된다.
 

@@ -110,9 +110,9 @@ public class Book extends BaseEntity {
 
 // cascade 종류 (기본값은 아무것도 없음, 주의해서 사용해야함)
 //-> ALL : 모두 적용
-//-> PERSIST : 영속 (딱 저장할 때만 life cycle을 맞춰야 하는 경우)
-//-> REMOVE : 삭제
-//-> MERGE : 병합
+//-> PERSIST : 영속 (딱 저장할 때만 life cycle을 맞춰야 하는 경우, 객체 등록 시 연관 객체도 같이 등록됨)
+//-> REMOVE : 삭제(객체 내에 연관객체도 같이 삭제됨)
+//-> MERGE : 병합(객체 내에 연관객체 수정 시 적용됨)
 //-> REFRESH : REFRESH (다시 로딩)
 //-> DETACH : DETACH (영속성 분리)
 

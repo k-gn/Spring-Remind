@@ -61,7 +61,7 @@ public class BookRepositoryTest {
     public void cascade() {
         Publisher publisher = new Publisher();
         publisher.setName("FastCampus");
-//        publisherRepository.save(publisher);
+//        publisherRepository.save(publisher); // cascade persist
 
         System.out.println("==================================================1");
 
