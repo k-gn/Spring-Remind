@@ -64,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     // 선택 일치를 기반으로 리소스 수준에서 웹 기반 보안을 구성
-    // 리소스(URL) 접근 권한 설정
+    // 리소스(URL) 접근 권한 설정, 필터 체인 구성 가능
     // 인증 전체 흐름에 필요한 Login, Logout 페이지 인증완료 후 페이지 인증 실패 시 이동페이지 등등 설정
     // 인증 로직을 커스텀하기위한 커스텀 필터 설정
     // 기타 csrf, 강제 https 호출 등등 거의 모든 스프링시큐리티의 설정
