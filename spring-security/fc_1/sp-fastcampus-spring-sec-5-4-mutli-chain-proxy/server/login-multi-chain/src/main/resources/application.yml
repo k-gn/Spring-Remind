@@ -1,0 +1,14 @@
+server:
+  port: 9054
+
+spring:
+  thymeleaf:
+    # thymeleaf 참조 경로
+    prefix: classpath:/templates/
+    # spring.thymeleaf.cache
+    # false로 해놓았을 때 타임리프를 수정하고 서버를 재시작할 필요 없이 새로 고침만으로 반영이 된다.
+    #(서버 재시작을 안 해도 되어 매우 편리하다!)
+    # 개발할 때는 false로 두고 반영 시에는 true로 설정해놓는 게 좋다.
+    cache: false
+    # templates 디렉토리에 파일이 있는지 없는지 체크, 없으면 에러를 발생시킨다.
+    check-template-location: true

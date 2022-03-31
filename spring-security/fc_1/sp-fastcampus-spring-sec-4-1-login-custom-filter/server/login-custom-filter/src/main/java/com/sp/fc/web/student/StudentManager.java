@@ -34,7 +34,7 @@ public class StudentManager implements AuthenticationProvider, InitializingBean 
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return authentication == UsernamePasswordAuthenticationToken.class;
+        return authentication == UsernamePasswordAuthenticationToken.class; // 처리 가능한 토큰 타입
     }
 
     // 초기화

@@ -1,0 +1,8 @@
+// 공통된 설정을 가져옴
+// 모듈로 나눠서 재활용
+apply from: "../web-common.gradle"
+
+dependencies {
+    compile project(":web-student-teacher")
+}
+

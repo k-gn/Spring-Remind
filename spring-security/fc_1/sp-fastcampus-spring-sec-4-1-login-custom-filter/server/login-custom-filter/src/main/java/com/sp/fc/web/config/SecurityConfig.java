@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(manager);
+        auth.authenticationProvider(manager); // 여러개 등록 가능(쌓인다), 차례대로 해당 토큰에 맞는 Provider에 방문함
     }
 
     @Override
