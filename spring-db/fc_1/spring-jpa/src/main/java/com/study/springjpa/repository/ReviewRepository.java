@@ -9,11 +9,14 @@ import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
+    // N+1 문제 발생 케이스
+    // - 즉시 로딩 (fetchType.EAGER) 변경후 findAll()로 조회하는 경우
+    // - 지연 로딩(LAZY) 변경 + Loop으로 조회하는 경우
     // n+1 해결방법 (꼭 n+1 이라고 나쁜건 아니다, 오히려 큰 데이터를 한번에 조인으로 가져오는 것이 더 안좋을 수도 있다. 따라서 상황에 맞게 사용,,!)
 
     // 1. @Query -> fetch join
     @Query("select distinct r from Review r join fetch r.comments") // review 와 comment join jpql,
-    // 그냥 join fetch 시 cross join 되서 review가 중복되서 3개로 나온다.
+    // 그냥 join fetch 시 cross join 되서 review가 중복되서 3개로 나온다. => distinct로 해결
     List<Review> findAllByFetchJoin();
 
     // 2. @EntityGraph : 기존 엔티티의 패치전략과 상관없이 한번에 해당 엔티티를 패치 조인으로 같이 가져온다.
