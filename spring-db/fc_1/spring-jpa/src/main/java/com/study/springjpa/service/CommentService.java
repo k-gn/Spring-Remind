@@ -30,7 +30,7 @@ public class CommentService {
 
     // 더티 체크 : 영속성 컨텍스트에서 관리중에 일어난 변경은 별도의 save 호출이 없어도 DB에 영속화 시켜준다.
     // SELECT를 한 엔티티에 대해서 하나하나 더티체크를 하는 과정으로 인한 성능 이슈가 있다.
-    @Transactional(readOnly = true) // readOnly = true : 더티 체크 X, 읽기 전용으로 조회만 가능 (대용량 조회속도 개선)
+    @Transactional(readOnly = true) // readOnly = true : 더티 체크 X(flush 사용 x), 읽기 전용으로 조회만 가능 (대용량 조회속도 개선)
     public void updateSomething() {
         List<Comment> comments = commentRepository.findAll();
 
