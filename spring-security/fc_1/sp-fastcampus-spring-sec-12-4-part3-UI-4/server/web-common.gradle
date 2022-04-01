@@ -1,0 +1,8 @@
+
+
+dependencies {
+    implementation("$boot:spring-boot-starter-web")
+    implementation("$boot:spring-boot-starter-thymeleaf")
+    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5") // 타임리프 시큐리티 확장 lib
+    implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect") // Thymeleaf에서 제공하는 layout 라이브러리
+}

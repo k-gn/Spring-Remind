@@ -1,0 +1,9 @@
+
+
+dependencies {
+
+    implementation("$boot:spring-boot-starter-data-jpa")
+    implementation("$boot:spring-boot-starter-oauth2-client")
+
+}
+
