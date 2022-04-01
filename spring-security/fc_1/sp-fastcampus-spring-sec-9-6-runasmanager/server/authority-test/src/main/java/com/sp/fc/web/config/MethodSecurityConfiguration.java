@@ -35,6 +35,8 @@ public class MethodSecurityConfiguration extends GlobalMethodSecurityConfigurati
     @Autowired
     private CustomPermissionEvaluator permissionEvaluator;
 
+
+    // 기존 MetadataSource 와 함께 동작할 CustomMetadataSource 등록
     @Override
     protected MethodSecurityMetadataSource customMethodSecurityMetadataSource() {
         return new CustomMetadataSource();

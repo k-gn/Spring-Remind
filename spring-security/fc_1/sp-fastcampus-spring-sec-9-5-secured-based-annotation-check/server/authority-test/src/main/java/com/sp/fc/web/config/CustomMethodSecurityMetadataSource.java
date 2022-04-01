@@ -15,7 +15,7 @@ public class CustomMethodSecurityMetadataSource implements MethodSecurityMetadat
 
     @Override
     public Collection<ConfigAttribute> getAttributes(Method method, Class<?> targetClass) {
-        if(method.getName().equals("getPaper") && targetClass == PaperController.class){
+        if(method.getName().equals("papersByPrimary") && targetClass == PaperController.class){
             return Arrays.asList(new SecurityConfig("SCHOOL_PRIMARY"));
         }
         return null;
