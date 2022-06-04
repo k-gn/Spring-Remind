@@ -19,7 +19,7 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id") // 따로 pk 값의 column 을 추가해 같게 할 필요 없음
     private List<Member> memberList;
 }
