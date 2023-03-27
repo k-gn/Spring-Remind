@@ -1,0 +1,1 @@
+alter table employee ADD COLUMN phone varchar(20);

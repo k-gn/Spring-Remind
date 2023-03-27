@@ -1,0 +1,1 @@
+alter table employee ADD COLUMN email varchar(200);
