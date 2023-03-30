@@ -1,0 +1,4 @@
+fcm:
+  api:
+    url: https://fcm.googleapis.com/v1/projects/fcm-test-de540/messages:send
+  certification: fcm-test-de540-firebase-adminsdk-o0f5c-2c12211784.json

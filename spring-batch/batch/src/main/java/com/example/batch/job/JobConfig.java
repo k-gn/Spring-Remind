@@ -28,7 +28,7 @@ public class JobConfig {
 			.start(simpleStep())
 			.build();
 	}
-           
+
 	@Bean
 	public Step simpleStep() {
 		return this.stepBuilderFactory
