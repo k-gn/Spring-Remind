@@ -1,14 +1,13 @@
 package com.example.fcm;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingException;
+import com.google.firebase.messaging.Message;
+import com.google.firebase.messaging.Notification;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,15 +17,32 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FirebaseMessageService {
 
-	@Value("${fcm.certification}")
-	private String credential;
+	private final FirebaseMessaging firebaseMessaging;
 
-	private void firebaseCreateOption() throws IOException {
-		FileInputStream refreshToken = new FileInputStream(credential);
-		FirebaseOptions options = FirebaseOptions.builder()
-			.setCredentials(GoogleCredentials.fromStream(refreshToken))
+	public String sendMessage(
+		String targetToken,
+		String title,
+		String body
+	) throws FirebaseMessagingException {
+		Message message = makeMessage(targetToken, title, body);
+		return firebaseMessaging.send(message);
+	}
+
+	private Message makeMessage(
+		String targetToken,
+		String title,
+		String body
+	) {
+		Notification notification = Notification
+			.builder()
+			.setTitle(title)
+			.setBody(body)
 			.build();
 
-		FirebaseApp.initializeApp(options);
+		return Message
+			.builder()
+			.setNotification(notification)
+			.setToken(targetToken)
+			.build();
 	}
 }
