@@ -1,0 +1,41 @@
+= Member API
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels:2
+:sectlinks:
+
+== Member API
+
+=== Member 페이징 조회
+include::{snippets}/member_page/curl-request.adoc[]
+include::{snippets}/member_page/http-request.adoc[]
+include::{snippets}/member_page/http-response.adoc[]
+include::{snippets}/member_page/httpie-request.adoc[]
+include::{snippets}/member_page/request-body.adoc[]
+include::{snippets}/member_page/response-body.adoc[]
+
+=== Member 단일 조회
+include::{snippets}/member_get/curl-request.adoc[]
+include::{snippets}/member_get/http-request.adoc[]
+include::{snippets}/member_get/http-response.adoc[]
+include::{snippets}/member_get/httpie-request.adoc[]
+include::{snippets}/member_get/request-body.adoc[]
+include::{snippets}/member_get/response-body.adoc[]
+
+=== Member 생성
+include::{snippets}/member_create/curl-request.adoc[]
+include::{snippets}/member_create/http-request.adoc[]
+include::{snippets}/member_create/http-response.adoc[]
+include::{snippets}/member_create/httpie-request.adoc[]
+include::{snippets}/member_create/request-body.adoc[]
+include::{snippets}/member_create/response-body.adoc[]
+
+=== Member 수정
+include::{snippets}/member_modify/curl-request.adoc[]
+include::{snippets}/member_modify/http-request.adoc[]
+include::{snippets}/member_modify/http-response.adoc[]
+include::{snippets}/member_modify/httpie-request.adoc[]
+include::{snippets}/member_modify/request-body.adoc[]
+include::{snippets}/member_modify/response-body.adoc[]
