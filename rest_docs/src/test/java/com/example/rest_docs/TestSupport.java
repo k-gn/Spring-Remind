@@ -36,7 +36,7 @@ public class TestSupport {
 	protected ObjectMapper objectMapper;
 
 	@Autowired
-	protected RestDocumentationResultHandler write;
+	protected RestDocumentationResultHandler restDocs;
 
 	@Autowired
 	private ResourceLoader resourceLoader;
@@ -49,7 +49,7 @@ public class TestSupport {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
 			.apply(MockMvcRestDocumentation.documentationConfiguration(provider))
 			.alwaysDo(MockMvcResultHandlers.print())
-			.alwaysDo(write)
+			.alwaysDo(restDocs)
 			.build();
 	}
 

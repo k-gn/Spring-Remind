@@ -1,4 +1,4 @@
-= Member API
+= API Docs
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
@@ -6,36 +6,6 @@
 :toclevels:2
 :sectlinks:
 
-== Member API
+include::overview.adoc[]
 
-=== Member 페이징 조회
-include::{snippets}/member-api-test/member_page_test/curl-request.adoc[]
-include::{snippets}/member-api-test/member_page_test/http-request.adoc[]
-include::{snippets}/member-api-test/member_page_test/http-response.adoc[]
-include::{snippets}/member-api-test/member_page_test/httpie-request.adoc[]
-include::{snippets}/member-api-test/member_page_test/request-body.adoc[]
-include::{snippets}/member-api-test/member_page_test/response-body.adoc[]
-
-=== Member 단일 조회
-include::{snippets}/member-api-test/member_get_test/curl-request.adoc[]
-include::{snippets}/member-api-test/member_get_test/http-request.adoc[]
-include::{snippets}/member-api-test/member_get_test/http-response.adoc[]
-include::{snippets}/member-api-test/member_get_test/httpie-request.adoc[]
-include::{snippets}/member-api-test/member_get_test/request-body.adoc[]
-include::{snippets}/member-api-test/member_get_test/response-body.adoc[]
-
-=== Member 생성
-include::{snippets}/member-api-test/member_create_test/curl-request.adoc[]
-include::{snippets}/member-api-test/member_create_test/http-request.adoc[]
-include::{snippets}/member-api-test/member_create_test/http-response.adoc[]
-include::{snippets}/member-api-test/member_create_test/httpie-request.adoc[]
-include::{snippets}/member-api-test/member_create_test/request-body.adoc[]
-include::{snippets}/member-api-test/member_create_test/response-body.adoc[]
-
-=== Member 수정
-include::{snippets}/member-api-test/member_modify_test/curl-request.adoc[]
-include::{snippets}/member-api-test/member_modify_test/http-request.adoc[]
-include::{snippets}/member-api-test/member_modify_test/http-response.adoc[]
-include::{snippets}/member-api-test/member_modify_test/httpie-request.adoc[]
-include::{snippets}/member-api-test/member_modify_test/request-body.adoc[]
-include::{snippets}/member-api-test/member_modify_test/response-body.adoc[]
+include::Member-API.adoc[]
