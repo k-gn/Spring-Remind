@@ -14,7 +14,4 @@ public class MemberModificationRequest {
 	@NotNull
 	private String name;
 
-	public static MemberModificationRequest fixture() {
-		return new MemberModificationRequest("test");
-	}
 }

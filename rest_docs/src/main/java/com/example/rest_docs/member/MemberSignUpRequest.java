@@ -22,7 +22,4 @@ public class MemberSignUpRequest {
 		return new Member(email, name);
 	}
 
-	public static MemberSignUpRequest fixture() {
-		return new MemberSignUpRequest("test@gmail.com", "test");
-	}
 }
