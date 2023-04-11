@@ -1,5 +1,6 @@
 package com.example.rest_docs.member;
 
+import static com.example.rest_docs.RestDocsConfiguration.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 
+import com.example.rest_docs.RestDocsConfiguration;
 import com.example.rest_docs.TestSupport;
 
 class MemberApiTest extends TestSupport {
@@ -58,8 +60,8 @@ class MemberApiTest extends TestSupport {
 			.andExpect(status().isOk())
 			.andDo(restDocs.document(
 				requestFields(
-					fieldWithPath("name").description("name"),
-					fieldWithPath("email").description("email")
+					fieldWithPath("name").description("name").attributes(field("length", "10")),
+					fieldWithPath("email").description("email").attributes(field("length", "30"))
 				)
 			));
 	}
@@ -77,7 +79,7 @@ class MemberApiTest extends TestSupport {
 					parameterWithName("id").description("Member ID")
 				),
 				requestFields(
-					fieldWithPath("name").description("name")
+					fieldWithPath("name").description("name").attributes(field("length", "10"))
 				)
 			));
 	}
