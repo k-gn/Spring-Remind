@@ -510,8 +510,8 @@ Content-Length: 758
   "pageable" : {
     "sort" : {
       "empty" : false,
-      "unsorted" : false,
-      "sorted" : true
+      "sorted" : true,
+      "unsorted" : false
     },
     "offset" : 0,
     "pageNumber" : 0,
@@ -522,14 +522,14 @@ Content-Length: 758
   "last" : true,
   "totalPages" : 1,
   "totalElements" : 5,
+  "size" : 10,
   "number" : 0,
   "sort" : {
     "empty" : false,
-    "unsorted" : false,
-    "sorted" : true
+    "sorted" : true,
+    "unsorted" : false
   },
   "first" : true,
-  "size" : 10,
   "numberOfElements" : 5,
   "empty" : false
 }</code></pre>
@@ -626,12 +626,13 @@ Content-Length: 49
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/members HTTP/1.1
 Content-Type: application/json
-Content-Length: 47
+Content-Length: 70
 Host: localhost:8080
 
 {
   "email" : "zoo@bbb.com",
-  "name" : "zoo"
+  "name" : "zoo",
+  "status" : "NORMAL"
 }</code></pre>
 </div>
 </div>
@@ -667,6 +668,13 @@ Host: localhost:8080
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">email</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">30</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">member status code</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>

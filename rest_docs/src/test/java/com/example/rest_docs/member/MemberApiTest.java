@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 
-import com.example.rest_docs.RestDocsConfiguration;
 import com.example.rest_docs.TestSupport;
 
 class MemberApiTest extends TestSupport {
@@ -61,7 +60,8 @@ class MemberApiTest extends TestSupport {
 			.andDo(restDocs.document(
 				requestFields(
 					fieldWithPath("name").description("name").attributes(field("length", "10")),
-					fieldWithPath("email").description("email").attributes(field("length", "30"))
+					fieldWithPath("email").description("email").attributes(field("length", "30")),
+					fieldWithPath("status").description("member status code")
 				)
 			));
 	}
@@ -82,5 +82,34 @@ class MemberApiTest extends TestSupport {
 					fieldWithPath("name").description("name").attributes(field("length", "10"))
 				)
 			));
+	}
+
+	@Test
+	void member_create_length_fail_test() throws Exception {
+		mockMvc.perform(
+				post("/api/members")
+					.contentType(MediaType.APPLICATION_JSON)
+					.content(readJson("/json/member-api/member-create-fail.json"))
+			)
+			.andExpect(status().isBadRequest());
+	}
+
+	@Test
+	void member_modify_length_fail_test() throws Exception {
+		mockMvc.perform(
+				RestDocumentationRequestBuilders.put("/api/members/{id}", 1L)
+					.contentType(MediaType.APPLICATION_JSON)
+					.content(readJson("/json/member-api/member-modify-fail.json"))
+			)
+			.andExpect(status().isBadRequest());
+	}
+
+	@Test
+	void memberStatus() throws Exception {
+		mockMvc.perform(
+				get("/test/memberStatus")
+					.contentType(MediaType.APPLICATION_JSON)
+			)
+			.andExpect(status().isOk());
 	}
 }
