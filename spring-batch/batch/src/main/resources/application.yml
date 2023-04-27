@@ -1,14 +1,24 @@
 spring:
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+  profiles:
+    active: local
+
+  batch:
+    job:
+      names: ${job.name:NONE}
+
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
 
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:~/batch-test
-    username: sa
-    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:7899/house?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: trip1234
 
   jpa:
     show-sql: true
