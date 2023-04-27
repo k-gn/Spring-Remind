@@ -27,7 +27,7 @@ spring:
       hibernate:
         format_sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
       jdbc:
         time_zone: Asia/Seoul
     database-platform: org.hibernate.dialect.H2Dialect
