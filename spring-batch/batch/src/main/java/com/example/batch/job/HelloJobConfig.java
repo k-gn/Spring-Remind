@@ -1,7 +1,5 @@
 package com.example.batch.job;
 
-import java.util.concurrent.TimeUnit;
-
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -37,7 +35,7 @@ import lombok.extern.slf4j.Slf4j;
 			- RepeatStatus (반복상태)를 설정한다.
  */
 @Slf4j
-public class JobConfig {
+public class HelloJobConfig {
 
 	private final JobBuilderFactory jobBuilderFactory;
 	private final StepBuilderFactory stepBuilderFactory;
