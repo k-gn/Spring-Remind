@@ -1,7 +1,6 @@
 package com.example.api.service;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -15,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.api.repository.CouponRepository;
 
 @SpringBootTest
-@Transactional
+@Transactional // 부트 @Transactionl 은 일반적으로 단일쓰레드에서만 지원
 class ApplyServiceTest {
 
 	@Autowired
