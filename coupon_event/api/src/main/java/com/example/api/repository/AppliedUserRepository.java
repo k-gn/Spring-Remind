@@ -7,15 +7,12 @@ import lombok.RequiredArgsConstructor;
 
 @Repository
 @RequiredArgsConstructor
-public class CouponCountRepository {
+public class AppliedUserRepository {
 
 	private final RedisTemplate<String, String> redisTemplate;
 
-	public Long increment() {
-		return redisTemplate.opsForValue().increment("coupon_count");
-	}
-
-	public void init() {
-		redisTemplate.opsForValue().set("coupon_count", "0");
+	public Long add(Long userId) {
+		// redis 는 set 에 값을 넣을 때 1을 리턴하고, 이미 존재하면 0을 리턴한다.
+		return redisTemplate.opsForSet().add("applied_user", userId.toString());
 	}
 }
