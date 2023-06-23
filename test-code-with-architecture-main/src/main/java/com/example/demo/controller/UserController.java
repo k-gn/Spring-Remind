@@ -74,6 +74,9 @@ public class UserController {
             .body(toMyProfileResponse(userEntity));
     }
 
+    /*
+        - 아래 변환 함수들은 과연 컨트롤러 책임인가?
+     */
     public UserResponse toResponse(UserEntity userEntity) {
         UserResponse userResponse = new UserResponse();
         userResponse.setId(userEntity.getId());
