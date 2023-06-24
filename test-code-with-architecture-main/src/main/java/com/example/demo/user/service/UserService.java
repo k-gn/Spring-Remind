@@ -6,7 +6,8 @@ import com.example.demo.user.domain.UserStatus;
 import com.example.demo.user.domain.UserCreate;
 import com.example.demo.user.domain.UserUpdate;
 import com.example.demo.user.infrastructure.UserEntity;
-import com.example.demo.user.infrastructure.UserRepository;
+import com.example.demo.user.service.port.UserRepository;
+
 import java.time.Clock;
 import java.util.Optional;
 import java.util.UUID;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserService {
 
+    // private final UserJpaRepository userJpaRepository;
     private final UserRepository userRepository;
     private final JavaMailSender mailSender;
 
