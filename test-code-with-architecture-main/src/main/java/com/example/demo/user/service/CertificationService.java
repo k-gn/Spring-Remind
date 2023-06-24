@@ -1,7 +1,5 @@
 package com.example.demo.user.service;
 
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.user.service.port.MailSender;
