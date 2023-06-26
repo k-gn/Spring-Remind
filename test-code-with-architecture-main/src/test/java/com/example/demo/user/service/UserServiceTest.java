@@ -1,49 +1,66 @@
 package com.example.demo.user.service;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.BDDMockito.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlGroup;
 
 import com.example.demo.common.domain.exception.CertificationCodeNotMatchedException;
 import com.example.demo.common.domain.exception.ResourceNotFoundException;
+import com.example.demo.mock.FakeMailSender;
+import com.example.demo.mock.FakeUserRepository;
+import com.example.demo.mock.TestClockHolder;
+import com.example.demo.mock.TestUuidHolder;
 import com.example.demo.user.domain.User;
-import com.example.demo.user.domain.UserStatus;
 import com.example.demo.user.domain.UserCreate;
+import com.example.demo.user.domain.UserStatus;
 import com.example.demo.user.domain.UserUpdate;
-import com.example.demo.user.infrastructure.UserEntity;
 
-@SpringBootTest
-@SqlGroup({
-	@Sql(value = "/sql/user-service-test-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
-	@Sql(value = "/sql/delete-all-test-data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-})
-// @Transactional
 class UserServiceTest {
 
-	@Autowired
-	private UserService userService;
+	private UserServiceImpl userService;
 
-	@MockBean
-	private JavaMailSender javaMailSender;
+	// fixture
+	@BeforeEach
+	void init() {
+		FakeMailSender fakeMailSender = new FakeMailSender();
+		FakeUserRepository fakeUserRepository = new FakeUserRepository();
+		this.userService = UserServiceImpl.builder()
+			.uuidHolder(new TestUuidHolder("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab"))
+			.clockHolder(new TestClockHolder(1678530673958L))
+			.userRepository(fakeUserRepository)
+			.certificationService(new CertificationService(fakeMailSender))
+			.build();
+		fakeUserRepository.save(User.builder()
+			.id(1L)
+			.email("kok202@naver.com")
+			.nickname("kok202")
+			.address("Seoul")
+			.certificationCode("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")
+			.status(UserStatus.ACTIVE)
+			.lastLoginAt(0L)
+			.build());
+		fakeUserRepository.save(User.builder()
+			.id(2L)
+			.email("kok303@naver.com")
+			.nickname("kok303")
+			.address("Seoul")
+			.certificationCode("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab")
+			.status(UserStatus.PENDING)
+			.lastLoginAt(0L)
+			.build());
+	}
 
 	@Test
 	void getByEmail_은_ACITVE_상태인_유저를_찾아올_수_있다() {
 		// given
-		String email = "rlarbska97@gmail.com";
+		String email = "kok202@naver.com";
 
 		// when
-		User result = userService.getByEmail(email);
+		User user = userService.getByEmail(email);
 
 		// then
-		assertThat(result.getId()).isNotNull();
+		assertThat(user.getId()).isNotNull();
 	}
 
 	@Test
@@ -61,10 +78,10 @@ class UserServiceTest {
 	void getById_은_ACITVE_상태인_유저를_찾아올_수_있다() {
 		// given
 		// when
-		User result = userService.getById(1);
+		User user = userService.getById(1);
 
 		// then
-		assertThat(result.getId()).isNotNull();
+		assertThat(user.getId()).isNotNull();
 	}
 
 	@Test
@@ -77,25 +94,25 @@ class UserServiceTest {
 	}
 
 	@Test
-	void userCreateDto_를_이용하여_유저를_생성한다() {
+	void userCreate를_이용하여_유저를_생성한다() {
 		// given
 		UserCreate userCreate = UserCreate.builder()
 			.email("rlarbska99@gmail.com")
 			.address("Seoul")
 			.nickname("Gyul3")
 			.build();
-		doNothing().when(javaMailSender).send(any(SimpleMailMessage.class));
 
 		// when
-		User result = userService.create(userCreate);
+		User user = userService.create(userCreate);
 
 		// then
-		assertThat(result.getId()).isNotNull();
-		assertThat(result.getStatus()).isEqualTo(UserStatus.PENDING);
+		assertThat(user.getId()).isNotNull();
+		assertThat(user.getStatus()).isEqualTo(UserStatus.PENDING);
+		assertThat(user.getCertificationCode()).isEqualTo("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab");
 	}
 
 	@Test
-	void userUpdateDto_를_이용하여_유저를_수정한다() {
+	void userUpdate를_이용하여_유저를_수정한다() {
 		// given
 		UserUpdate userUpdate = UserUpdate.builder()
 			.address("Busan")
@@ -106,10 +123,10 @@ class UserServiceTest {
 		userService.update(1, userUpdate);
 
 		// then
-		User result = userService.getById(1);
-		assertThat(result.getId()).isNotNull();
-		assertThat(result.getAddress()).isEqualTo("Busan");
-		assertThat(result.getNickname()).isEqualTo("Gyul3");
+		User user = userService.getById(1);
+		assertThat(user.getId()).isNotNull();
+		assertThat(user.getAddress()).isEqualTo("Busan");
+		assertThat(user.getNickname()).isEqualTo("Gyul3");
 	}
 
 	@Test
@@ -119,19 +136,20 @@ class UserServiceTest {
 		userService.login(1);
 
 		// then
-		User result = userService.getById(1);
-		assertThat(result.getLastLoginAt()).isGreaterThan(0);
+		User user = userService.getById(1);
+		assertThat(user.getLastLoginAt()).isGreaterThan(0);
+		assertThat(user.getLastLoginAt()).isEqualTo(1678530673958L);
 	}
 
 	@Test
 	void PENDING_상태의_사용자는_인증_코드로_ACTIVE_시킬_수_있다() {
 		// given
 		// when
-		userService.verifyEmail(2, "aaaaaaa-aaaa-aaaa-aaaaaaaaaaaaa");
+		userService.verifyEmail(2, "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab");
 
 		// then
-		User result = userService.getById(2);
-		assertThat(result.getStatus()).isEqualTo(UserStatus.ACTIVE);
+		User user = userService.getById(2);
+		assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
 	}
 
 	@Test

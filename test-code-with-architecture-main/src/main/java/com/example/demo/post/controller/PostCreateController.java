@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.post.controller.response.PostResponse;
 import com.example.demo.post.domain.PostCreate;
-import com.example.demo.post.service.PostService;
+import com.example.demo.post.service.PostServiceImpl;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PostCreateController {
 
-	private final PostService postService;
+	private final PostServiceImpl postService;
 
 	@PostMapping
 	public ResponseEntity<PostResponse> createPost(@RequestBody PostCreate postCreate) {
