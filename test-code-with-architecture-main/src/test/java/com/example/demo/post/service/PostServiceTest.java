@@ -25,6 +25,7 @@ class PostServiceTest {
 		FakeUserRepository fakeUserRepository = new FakeUserRepository();
 		this.postService = PostServiceImpl.builder()
 			.postRepository(fakePostRepository)
+			// 테스트 데이터 짜는게 귀찮다? -> 테스트가 보내는 신호 -> 의존성을 좀 줄여봐라~
 			.userRepository(fakeUserRepository)
 			.clockHolder(new TestClockHolder(1679530673958L))
 			.build();
@@ -66,6 +67,7 @@ class PostServiceTest {
 		// then
 		assertThat(result.getContent()).isEqualTo("helloworld");
 		assertThat(result.getWriter().getEmail()).isEqualTo("kok202@naver.com");
+		assertThat(result.getCreatedAt()).isEqualTo(1678530673958L);
 	}
 
 	@Test
@@ -82,7 +84,7 @@ class PostServiceTest {
 		// then
 		assertThat(post.getId()).isNotNull();
 		assertThat(post.getContent()).isEqualTo("foobar");
-		assertThat(post.getCreatedAt()).isGreaterThan(0);
+		assertThat(post.getCreatedAt()).isEqualTo(1679530673958L);
 	}
 
 	@Test
@@ -98,6 +100,6 @@ class PostServiceTest {
 		// then
 		Post post = postService.getById(1);
 		assertThat(post.getContent()).isEqualTo("hello world :)");
-		assertThat(post.getModifiedAt()).isGreaterThan(0);
+		assertThat(post.getModifiedAt()).isEqualTo(1679530673958L);
 	}
 }

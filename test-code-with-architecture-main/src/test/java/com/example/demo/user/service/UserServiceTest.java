@@ -16,6 +16,10 @@ import com.example.demo.user.domain.UserCreate;
 import com.example.demo.user.domain.UserStatus;
 import com.example.demo.user.domain.UserUpdate;
 
+/*
+	- 중형 테스트는 스프링과 h2 등을 올리는 시간 소모로 테스트 속도가 느리다
+	- 소형 테스트로 변환하여 빠른 속도로 테스트가 가능하다.
+ */
 class UserServiceTest {
 
 	private UserServiceImpl userService;
