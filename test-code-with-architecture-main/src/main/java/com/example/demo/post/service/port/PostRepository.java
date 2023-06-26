@@ -2,10 +2,10 @@ package com.example.demo.post.service.port;
 
 import java.util.Optional;
 
-import com.example.demo.post.infrastructure.PostEntity;
+import com.example.demo.post.domain.Post;
 
 public interface PostRepository {
 
-	Optional<PostEntity> findById(long id);
-	PostEntity save(PostEntity postEntity);
+	Optional<Post> findById(long id);
+	Post save(Post post);
 }
