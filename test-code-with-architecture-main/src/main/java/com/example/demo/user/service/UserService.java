@@ -28,6 +28,8 @@ public class UserService {
 	private final UserRepository userRepository;
 	// private final JavaMailSender mailSender;
 	private final CertificationService certificationService;
+
+	// 의존성 역전
 	private final UuidHolder uuidHolder;
 	private final ClockHolder clockHolder;
 
