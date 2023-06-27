@@ -109,6 +109,11 @@ class UserServiceTest {
 		// when
 		User user = userService.create(userCreate);
 
+		/*
+			테스트 하나에 assert 는 되도록 적은게 좋긴 하지만,
+			필수로 지켜야할 사항은 아니다.
+			-> 어떤 테스트인지, 뭐가 중요한지에 대한 표현력이 핵심이다.
+		 */
 		// then
 		assertThat(user.getId()).isNotNull();
 		assertThat(user.getStatus()).isEqualTo(UserStatus.PENDING);
@@ -165,3 +170,20 @@ class UserServiceTest {
 			.isInstanceOf(CertificationCodeNotMatchedException.class);
 	}
 }
+/*
+	# 테스트 tip
+
+	1. ParameterizedTest
+	2. assertAll
+	3. 하나의 테스트는 하나의 개념
+	4. Thread.sleep
+		- 비동기 처리 테스트 시 Thread.sleep 은 개별 데스크탑에 따라 결과가 달라질 수 있다.
+			- Thread join (범용적인 해결책은 아니다.)
+			- Awaitility 같은 라이브러리를 활용
+	5. FIRST
+		- Fast : 빨라야한다.
+		- Independent : 독립적이다.
+		- Repeatable : 반복해도 같은 결과가 나온다.
+		- Self-validating : 성공/실패를 알아야한다.
+		- Timely : 적시에 작성해야한다.
+ */
