@@ -7,24 +7,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.user.controller.port.UserService;
 import com.example.demo.user.controller.response.UserResponse;
 import com.example.demo.user.domain.User;
 import com.example.demo.user.domain.UserCreate;
 import com.example.demo.user.service.UserServiceImpl;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 
 @Tag(name = "유저(users)")
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
+@Builder
 public class UserCreateController {
 
-	private final UserServiceImpl userService;
+	private final UserService userService;
 
 	@PostMapping
-	public ResponseEntity<UserResponse> createUser(@RequestBody UserCreate userCreate) {
+	public ResponseEntity<UserResponse> create(@RequestBody UserCreate userCreate) {
 		User user = userService.create(userCreate);
 		return ResponseEntity
 			.status(HttpStatus.CREATED)
