@@ -1,0 +1,28 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create # dev, prod 환경 시 validate or none 사용
+    properties:
+      hibernate:
+        format_sql : true # 콘솔창에 sql 예쁘게 출력
+        default_batch_fetch_size: 500 # 일대다 컬렉션 조회 시 성능 최적화 (where ~ in) / 100 ~ 1000 권장 (부하 고려)
+        show-sql: true # 콘솔창에 sql 출력
+    open-in-view: false # 영속성 컨텍스트의 생존 범위를 서비스 계층으로 한정 (오래 유지시킨다면 DB Connection 을 계속 가지고 있어 부족할 수 있음)
+  servlet:
+    multipart:
+      max-file-size: 10MB # 파일 업로드 요청 시 하나의 파일 크기 10MB로 제한
+      max-request-size: 100MB # 파일 업로드 요청 시 모든 파일의 크기의합 100MB로 제한
+
+logging:
+  level:
+    org.hibernate.type: trace # 콘솔창에 조건에 바인딩되는 값 및 조회 결과 출력
