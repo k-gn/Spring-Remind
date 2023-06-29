@@ -16,7 +16,7 @@ public class JasyptConfig {
 	@Bean
 	public PooledPBEStringEncryptor jasyptStringEncryptor() {
 		PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
-		encryptor.setPoolSize(4);
+		encryptor.setPoolSize(4); // 머신 코어수와 동일하면 좋다.
 		encryptor.setPassword(password);
 		encryptor.setAlgorithm("PBEWithMD5AndTripleDES"); // 암호화 알고리즘 설정
 		return encryptor;

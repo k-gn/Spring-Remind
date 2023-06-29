@@ -47,7 +47,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authenticationInterceptor)
-                .order(1)
+                .order(1) // 동작 순서
                 .addPathPatterns("/api/**")
                 .excludePathPatterns("/api/oauth/login",
                         "/api/access-token/issue",
@@ -64,6 +64,7 @@ public class WebConfig implements WebMvcConfigurer {
         resolvers.add(memberInfoArgumentResolver);
     }
 
+    // xss 방어
     @Bean
     public FilterRegistrationBean<XssEscapeServletFilter> filterRegistrationBean() {
         FilterRegistrationBean<XssEscapeServletFilter> filterRegistration = new FilterRegistrationBean<>();

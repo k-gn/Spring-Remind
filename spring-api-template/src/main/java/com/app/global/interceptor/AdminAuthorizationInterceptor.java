@@ -20,11 +20,10 @@ public class AdminAuthorizationInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
         String authorizationHeader = request.getHeader("Authorization");
-        String accessToken = authorizationHeader.split(" ")[1];
+        String token = authorizationHeader.split(" ")[1];
 
-        Claims tokenClaims = tokenManager.getTokenClaims(accessToken);
+        Claims tokenClaims = tokenManager.getTokenClaims(token);
         String role = (String)tokenClaims.get("role");
         if(!Role.ADMIN.equals(Role.valueOf(role))) {
             throw new AuthenticationException(ErrorCode.FORBIDDEN_ADMIN);
