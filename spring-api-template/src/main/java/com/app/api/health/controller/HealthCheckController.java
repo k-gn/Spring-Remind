@@ -25,6 +25,13 @@ public class HealthCheckController {
 
 	@GetMapping("/health")
 	public ResponseEntity<HealthCheckResponse> healthCheck() {
+		/* # feign read time test
+			try {
+				Thread.sleep(6000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		*/
 		return ResponseEntity.ok(HealthCheckResponse.of("ok", Arrays.asList(environment.getActiveProfiles())));
 	}
 }

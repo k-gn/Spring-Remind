@@ -26,3 +26,11 @@ spring:
 logging:
   level:
     org.hibernate.type: trace # 콘솔창에 조건에 바인딩되는 값 및 조회 결과 출력
+    com.app: debug
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000 # 연결 대기 시간
+        readTimeout: 5000 # 응답 대기 시간
