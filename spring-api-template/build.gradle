@@ -33,6 +33,11 @@ dependencies {
 
     // 인터페이스와 Spring MVC 어노테이션 선언으로 http 호출이 가능한 빈 자동 생성 (RestTemplate 보다 깔끔하다)
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
+
+    implementation 'com.navercorp.lucy:lucy-xss-servlet:2.0.0'
+    implementation 'org.apache.commons:commons-text:1.8'
 
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
