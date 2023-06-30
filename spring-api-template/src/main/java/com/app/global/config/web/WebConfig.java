@@ -2,7 +2,7 @@ package com.app.global.config.web;
 
 import com.app.global.interceptor.AdminAuthorizationInterceptor;
 import com.app.global.interceptor.AuthenticationInterceptor;
-import com.app.global.resolver.memberinfo.MemberInfoArgumentResolver;
+import com.app.global.resolver.member.MemberInfoArgumentResolver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter;
 import lombok.RequiredArgsConstructor;

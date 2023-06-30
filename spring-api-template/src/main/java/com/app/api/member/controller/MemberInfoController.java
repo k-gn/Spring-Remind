@@ -2,8 +2,8 @@ package com.app.api.member.controller;
 
 import com.app.api.member.dto.MemberInfoResponse;
 import com.app.api.member.service.MemberInfoService;
-import com.app.global.resolver.memberinfo.TokenMember;
-import com.app.global.resolver.memberinfo.MemberInfo;
+import com.app.global.resolver.member.TokenMember;
+import com.app.global.resolver.member.MemberInfo;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -10,7 +10,7 @@ import com.app.domain.member.constant.MemberType;
 import com.app.domain.member.constant.Role;
 import com.app.domain.member.entity.Member;
 import com.app.domain.member.service.MemberService;
-import com.app.external.oauth.model.OAuthAttributes;
+import com.app.external.oauth.dto.OAuthAttributes;
 import com.app.external.oauth.service.SocialLoginApiService;
 import com.app.external.oauth.service.SocialLoginApiServiceFactory;
 import com.app.global.jwt.dto.JwtToken;

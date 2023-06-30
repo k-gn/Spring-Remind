@@ -1,6 +1,6 @@
 package com.app.external.oauth.service;
 
-import com.app.external.oauth.model.OAuthAttributes;
+import com.app.external.oauth.dto.OAuthAttributes;
 
 public interface SocialLoginApiService {
 
