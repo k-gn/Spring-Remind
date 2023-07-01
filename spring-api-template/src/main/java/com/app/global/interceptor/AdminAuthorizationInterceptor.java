@@ -1,6 +1,6 @@
 package com.app.global.interceptor;
 
-import com.app.domain.member.constant.Role;
+import com.app.domain.member.constants.Role;
 import com.app.global.error.ErrorCode;
 import com.app.global.error.exception.AuthenticationException;
 import com.app.global.jwt.service.TokenManager;

@@ -1,6 +1,6 @@
 package com.app.global.resolver.member;
 
-import com.app.domain.member.constant.Role;
+import com.app.domain.member.constants.Role;
 import com.app.global.jwt.service.TokenManager;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;

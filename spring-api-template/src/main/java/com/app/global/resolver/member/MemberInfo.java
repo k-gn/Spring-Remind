@@ -1,6 +1,6 @@
 package com.app.global.resolver.member;
 
-import com.app.domain.member.constant.Role;
+import com.app.domain.member.constants.Role;
 import lombok.Builder;
 import lombok.Getter;
 
