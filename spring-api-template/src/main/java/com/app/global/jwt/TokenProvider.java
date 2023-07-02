@@ -1,7 +1,10 @@
-package com.app.global.jwt.service;
+package com.app.global.jwt;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import com.app.domain.member.constants.Role;
 import com.app.global.error.ErrorCode;
@@ -19,11 +22,17 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-public class TokenManager {
+@Component
+public class TokenProvider {
 
-	private final String accessTokenExpirationTime;
-	private final String refreshTokenExpirationTime;
-	private final String tokenSecret;
+	@Value("${token.access-token-expiration-time}")
+	private String accessTokenExpirationTime;
+
+	@Value("${token.refresh-token-expiration-time}")
+	private String refreshTokenExpirationTime;
+
+	@Value("${token.secret}")
+	private String tokenSecret;
 
 	public JwtToken createJwtToken(
 		Long memberId,

@@ -4,7 +4,7 @@ import com.app.presentation.auth.token.controller.response.AccessTokenResponse;
 import com.app.domain.member.Member;
 import com.app.application.member.service.MemberService;
 import com.app.global.jwt.constant.GrantType;
-import com.app.global.jwt.service.TokenManager;
+import com.app.global.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,14 +17,14 @@ import java.util.Date;
 public class TokenService {
 
     private final MemberService memberService;
-    private final TokenManager tokenManager;
+    private final TokenProvider tokenProvider;
 
     public AccessTokenResponse createAccessTokenByRefreshToken(String refreshToken) {
-        tokenManager.validateToken(refreshToken);
+        tokenProvider.validateToken(refreshToken);
         Member member = memberService.findMemberByRefreshToken(refreshToken);
 
-        Date accessTokenExpireTime = tokenManager.createAccessTokenExpireTime();
-        String accessToken = tokenManager.createAccessToken(member.getMemberId(), member.getRole(), accessTokenExpireTime);
+        Date accessTokenExpireTime = tokenProvider.createAccessTokenExpireTime();
+        String accessToken = tokenProvider.createAccessToken(member.getMemberId(), member.getRole(), accessTokenExpireTime);
 
         return AccessTokenResponse.builder()
                 .grantType(GrantType.BEARER.getType())

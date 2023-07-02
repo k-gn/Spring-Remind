@@ -14,7 +14,7 @@ import com.app.infrastructure.external.oauth.dto.OAuthAttributes;
 import com.app.infrastructure.external.oauth.service.SocialLoginApiService;
 import com.app.infrastructure.external.oauth.service.SocialLoginApiServiceFactory;
 import com.app.global.jwt.dto.JwtToken;
-import com.app.global.jwt.service.TokenManager;
+import com.app.global.jwt.TokenProvider;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 public class OauthLoginService {
 
 	private final MemberService memberService;
-	private final TokenManager tokenManager;
+	private final TokenProvider tokenProvider;
 
 	public OauthLogin.Response oauthLogin(
 		String accessToken,
@@ -45,7 +45,7 @@ public class OauthLoginService {
 			oauthMember = optionalMember.get();
 		}
 		// 토큰 생성
-		JwtToken jwtToken = tokenManager.createJwtToken(oauthMember.getMemberId(), oauthMember.getRole());
+		JwtToken jwtToken = tokenProvider.createJwtToken(oauthMember.getMemberId(), oauthMember.getRole());
 		oauthMember.updateRefreshToken(jwtToken);
 		return OauthLogin.Response.of(jwtToken);
 	}

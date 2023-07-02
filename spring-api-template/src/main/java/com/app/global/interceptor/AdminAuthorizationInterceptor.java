@@ -3,7 +3,7 @@ package com.app.global.interceptor;
 import com.app.domain.member.constants.Role;
 import com.app.global.error.ErrorCode;
 import com.app.global.error.exception.AuthenticationException;
-import com.app.global.jwt.service.TokenManager;
+import com.app.global.jwt.TokenProvider;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -16,14 +16,14 @@ import javax.servlet.http.HttpServletResponse;
 @RequiredArgsConstructor
 public class AdminAuthorizationInterceptor implements HandlerInterceptor {
 
-    private final TokenManager tokenManager;
+    private final TokenProvider tokenProvider;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String authorizationHeader = request.getHeader("Authorization");
         String token = authorizationHeader.split(" ")[1];
 
-        Claims tokenClaims = tokenManager.getTokenClaims(token);
+        Claims tokenClaims = tokenProvider.getTokenClaims(token);
         String role = (String)tokenClaims.get("role");
         if(!Role.ADMIN.equals(Role.valueOf(role))) {
             throw new AuthenticationException(ErrorCode.FORBIDDEN_ADMIN);

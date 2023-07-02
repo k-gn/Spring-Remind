@@ -30,6 +30,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
     // 인터페이스와 Spring MVC 어노테이션 선언으로 http 호출이 가능한 빈 자동 생성 (RestTemplate 보다 깔끔하다)
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'

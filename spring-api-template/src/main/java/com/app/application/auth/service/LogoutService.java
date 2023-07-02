@@ -10,7 +10,7 @@ import com.app.application.member.service.MemberService;
 import com.app.global.error.ErrorCode;
 import com.app.global.error.exception.AuthenticationException;
 import com.app.global.jwt.constant.TokenType;
-import com.app.global.jwt.service.TokenManager;
+import com.app.global.jwt.TokenProvider;
 
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +21,12 @@ import lombok.RequiredArgsConstructor;
 public class LogoutService {
 
 	private final MemberService memberService;
-	private final TokenManager tokenManager;
+	private final TokenProvider tokenProvider;
 
 	public void logout(String accessToken) {
-		tokenManager.validateToken(accessToken);
+		tokenProvider.validateToken(accessToken);
 
-		Claims tokenClaims = tokenManager.getTokenClaims(accessToken);
+		Claims tokenClaims = tokenProvider.getTokenClaims(accessToken);
 		String tokenType = tokenClaims.getSubject();
 		if (!TokenType.isAccessToken(tokenType)) {
 			throw new AuthenticationException(ErrorCode.NOT_ACCESS_TOKEN_TYPE);
