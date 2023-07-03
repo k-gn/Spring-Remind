@@ -34,3 +34,7 @@ feign:
       default:
         connectTimeout: 5000 # 연결 대기 시간
         readTimeout: 5000 # 응답 대기 시간
+
+
+jasypt:
+  password: ${PASSWORD}
