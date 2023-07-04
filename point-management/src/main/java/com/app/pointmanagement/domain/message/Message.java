@@ -1,6 +1,8 @@
 package com.app.pointmanagement.domain.message;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,4 +30,16 @@ public class Message extends IdEntity {
 
 	@Column(name = "content", nullable = false, columnDefinition = "text")
 	private String content;
+
+	public static Message createExpiredPointMessage(
+		String userId,
+		LocalDate expiredDate,
+		BigInteger expiredAmount
+	) {
+		return new Message(
+			userId,
+			String.format("%s 포인트 만료", expiredAmount),
+			String.format("%s 기준 %s 포인트가 만료되었습니다.", expiredDate.format(DateTimeFormatter.ISO_DATE), expiredAmount)
+		);
+	}
 }

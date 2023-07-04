@@ -59,7 +59,7 @@ class ExecutePointReservationJobConfigTest extends BatchTestSupport {
 		List<Point> points = pointRepository.findAll();
 		assertThat(points).hasSize(1);
 		assertThat(points.get(0).getAmount()).isEqualTo(1000);
-		assertThat(points.get(0).getEaredDate()).isEqualTo(LocalDate.of(2021, 1, 5));
+		assertThat(points.get(0).getEarnedDate()).isEqualTo(LocalDate.of(2021, 1, 5));
 		assertThat(points.get(0).getExpiredDate()).isEqualTo(LocalDate.of(2021, 1, 15));
 
 		List<PointWallet> wallets = pointWalletRepository.findAll();

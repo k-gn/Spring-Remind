@@ -9,6 +9,10 @@ import org.springframework.context.annotation.Configuration;
 
 import com.app.pointmanagement.batch.job.validator.TodayJobParameterValidator;
 
+/*
+	Program arguments : --job.name=expirePointJob today=2023-07-04
+	build run : java -jar [jar-file-name].jar --job.name=expirePointJob today=2023-07-04
+ */
 @Configuration
 public class ExpirePointJobConfig {
 

@@ -58,7 +58,7 @@ public class ExecutePointReservationStepConfig {
 		return new JpaPagingItemReaderBuilder<PointReservation>()
 			.name("executePointReservationItemReader")
 			.entityManagerFactory(entityManagerFactory)
-			.queryString("select pr from PointReservation pr where pr.earedDate = :today and pr.executed = false")
+			.queryString("select pr from PointReservation pr where pr.earnedDate = :today and pr.executed = false")
 			.parameterValues(Map.of("today", today))
 			.pageSize(1000)
 			.build();
@@ -69,15 +69,15 @@ public class ExecutePointReservationStepConfig {
 	public ItemProcessor<PointReservation, Pair<PointReservation, Point>> executePointReservationItemProcessor() {
 		return reservation -> {
 			reservation.execute();
-			Point earedPoint = new Point(
+			Point earnedPoint = new Point(
 				reservation.getPointWallet(),
 				reservation.getAmount(),
-				reservation.getEaredDate(),
+				reservation.getEarnedDate(),
 				reservation.getExpiredDate()
 			);
 			PointWallet wallet = reservation.getPointWallet();
-			wallet.setAmount(wallet.getAmount().add(earedPoint.getAmount()));
-			return Pair.of(reservation, earedPoint);
+			wallet.setAmount(wallet.getAmount().add(earnedPoint.getAmount()));
+			return Pair.of(reservation, earnedPoint);
 		};
 	}
 

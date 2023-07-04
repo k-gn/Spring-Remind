@@ -30,24 +30,24 @@ public class PointReservation extends IdEntity {
 	@Column(name = "amount", nullable = false, columnDefinition = "BIGINT")
 	private BigInteger amount;
 
-	@Column(name = "eared_date", nullable = false)
-	private LocalDate earedDate; // 언제 적립할 건지
+	@Column(name = "earned_date", nullable = false)
+	private LocalDate earnedDate; // 언제 적립할 건지
 
 	@Column(name = "available_days", nullable = false)
 	private int availableDays; // 적립한 일 + 유효일 = 만료일
 
-	@Column(name = "is_expired", nullable = false)
+	@Column(name = "is_executed", nullable = false)
 	private boolean executed;
 
 	public PointReservation(
 		PointWallet pointWallet,
 		BigInteger amount,
-		LocalDate earedDate,
+		LocalDate earnedDate,
 		int availableDays
 	) {
 		this.pointWallet = pointWallet;
 		this.amount = amount;
-		this.earedDate = earedDate;
+		this.earnedDate = earnedDate;
 		this.availableDays = availableDays;
 	}
 
@@ -56,6 +56,6 @@ public class PointReservation extends IdEntity {
 	}
 
 	public LocalDate getExpiredDate() {
-		return this.earedDate.plusDays(this.availableDays);
+		return this.earnedDate.plusDays(this.availableDays);
 	}
 }

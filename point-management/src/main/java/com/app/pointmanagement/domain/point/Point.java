@@ -30,8 +30,8 @@ public class Point extends IdEntity {
 	@Column(name = "amount", nullable = false, columnDefinition = "BIGINT")
 	private BigInteger amount;
 
-	@Column(name = "eared_date", nullable = false)
-	private LocalDate earedDate;
+	@Column(name = "earned_date", nullable = false)
+	private LocalDate earnedDate;
 
 	@Column(name = "expired_date", nullable = false)
 	private LocalDate expiredDate;
@@ -45,13 +45,29 @@ public class Point extends IdEntity {
 	public Point(
 		PointWallet pointWallet,
 		BigInteger amount,
-		LocalDate earedDate,
+		LocalDate earnedDate,
 		LocalDate expiredDate
 	) {
 		this.pointWallet = pointWallet;
 		this.amount = amount;
-		this.earedDate = earedDate;
+		this.earnedDate = earnedDate;
 		this.expiredDate = expiredDate;
+	}
+
+	public Point(
+		PointWallet pointWallet,
+		BigInteger amount,
+		LocalDate earnedDate,
+		LocalDate expiredDate,
+		boolean used,
+		boolean expired
+	) {
+		this.pointWallet = pointWallet;
+		this.amount = amount;
+		this.earnedDate = earnedDate;
+		this.expiredDate = expiredDate;
+		this.used = used;
+		this.expired = expired;
 	}
 
 	public void expire() {

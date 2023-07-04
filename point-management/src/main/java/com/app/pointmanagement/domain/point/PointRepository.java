@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.app.pointmanagement.domain.message.Message;
 
-public interface PointRepository extends JpaRepository<Point, Long> {
+public interface PointRepository extends JpaRepository<Point, Long>, PointCustomRepository {
 }
