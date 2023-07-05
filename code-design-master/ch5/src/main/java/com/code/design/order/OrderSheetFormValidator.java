@@ -13,6 +13,7 @@ public class OrderSheetFormValidator implements ConstraintValidator<OrderSheetFo
 
     }
 
+    // 상호 배타적인 값들을 처리해주는 custom annotation validator
     @Override
     public boolean isValid(OrderSheetRequest value, ConstraintValidatorContext context) {
         int invalidCount = 0;
@@ -78,6 +79,7 @@ public class OrderSheetFormValidator implements ConstraintValidator<OrderSheetFo
     ) {
         context.disableDefaultConstraintViolation();
         context.buildConstraintViolationWithTemplate(errorMessage)
+            // ex. payment.account.number
             .addPropertyNode(firstNode)
             .addPropertyNode(secondNode)
             .addPropertyNode(thirdNode)

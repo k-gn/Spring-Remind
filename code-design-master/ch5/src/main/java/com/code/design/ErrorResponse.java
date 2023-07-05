@@ -17,13 +17,14 @@ public class ErrorResponse {
     private int status;
     private List<FieldError> errors;
     private String code;
-
+    private LocalDateTime timestamp;
 
     private ErrorResponse(final ErrorCode code, final List<FieldError> errors) {
         this.message = code.getMessage();
         this.status = code.getStatus();
         this.errors = errors;
         this.code = code.getCode();
+        this.timestamp = LocalDateTime.now();
     }
 
     private ErrorResponse(final ErrorCode code) {
@@ -31,6 +32,7 @@ public class ErrorResponse {
         this.status = code.getStatus();
         this.code = code.getCode();
         this.errors = new ArrayList<>();
+        this.timestamp = LocalDateTime.now();
     }
 
 
@@ -72,7 +74,7 @@ public class ErrorResponse {
             return fieldErrors;
         }
 
-        private static List<FieldError> of(final BindingResult bindingResult) {
+        public static List<FieldError> of(final BindingResult bindingResult) {
             final List<org.springframework.validation.FieldError> fieldErrors = bindingResult.getFieldErrors();
             return fieldErrors.stream()
                 .map(error -> new FieldError(

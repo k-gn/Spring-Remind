@@ -18,15 +18,14 @@ public class EmailDuplicationValidator implements ConstraintValidator<EmailUniqu
 
     }
 
+    // isValid() 가 핵심 구현
     @Override
     public boolean isValid(String email, ConstraintValidatorContext cxt) {
-
         boolean isExistEmail = memberRepository.existsByEmail(email);
-
         if (isExistEmail) {
-            cxt.disableDefaultConstraintViolation();
-            cxt.buildConstraintViolationWithTemplate(
-                    MessageFormat.format("Email {0} already exists!", email))
+            cxt.disableDefaultConstraintViolation(); // 기본 메시지 제거
+            cxt.buildConstraintViolationWithTemplate( // 새로운 메시지 추가
+                    MessageFormat.format("{0} already exists!", email))
                 .addConstraintViolation();
         }
         return !isExistEmail;

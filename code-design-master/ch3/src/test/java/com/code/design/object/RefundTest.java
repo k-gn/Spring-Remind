@@ -71,8 +71,8 @@ class RefundTest {
 
     @Test
     public void ByCreditBuilder_test_account_null이면_exception() {
-        thenThrownBy(() -> Refund.ByAccountBuilder()
-            .account(null)
+        thenThrownBy(() -> Refund.ByCreditBuilder()
+            .creditCard(null)
             .order(order)
             .build()
         )

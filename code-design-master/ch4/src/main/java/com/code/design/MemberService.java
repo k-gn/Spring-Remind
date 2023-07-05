@@ -20,6 +20,8 @@ public class MemberService {
         return member;
     }
 
+    // Checked Exception는 반드시 예외처리 / 트랜잭션 롤백 안됨
+    // 예외를 계속 던지기 보단 감싼 후 런타임 예외로 처리해주는게 좋다.
     public Member createCheckedException() throws IOException {
         final Member member = memberRepository.save(new Member("wan"));
         if (true) {

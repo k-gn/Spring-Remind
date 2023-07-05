@@ -33,8 +33,11 @@ public class Refund {
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
+    // Account, CreditCard 둘 중 하나만 받아야 하는 구존데 둘 다 받는 경우는 디자인이 좋지 않다는 것
+    // 상호 배타적인 파라미터가 존재한다면 적절히 분리하는 것이 좋다. -> 책임과 의도 표현
 
-    @Builder(builderClassName = "ByAccountBuilder", builderMethodName = "ByAccountBuilder") // 계좌 번호 기반 환불, Builder 이름을 부여해서 그에 따른 책임 부여, 그에 따른 필수 인자값 명확
+    // 계좌 번호 기반 환불, Builder 이름을 부여해서 그에 따른 책임 부여, 그에 따른 필수 인자값 명확
+    @Builder(builderClassName = "ByAccountBuilder", builderMethodName = "ByAccountBuilder")
     public Refund(Account account, Order order) {
         Assert.notNull(account, "account must not be null");
         Assert.notNull(order, "order must not be null");
@@ -43,7 +46,8 @@ public class Refund {
         this.account = account;
     }
 
-    @Builder(builderClassName = "ByCreditBuilder", builderMethodName = "ByCreditBuilder")  // 신용 카드 기반 환불, Builder 이름을 부여해서 그에 따른 책임 부여, 그에 따른 필수 인자값 명확
+    // 신용 카드 기반 환불, Builder 이름을 부여해서 그에 따른 책임 부여, 그에 따른 필수 인자값 명확
+    @Builder(builderClassName = "ByCreditBuilder", builderMethodName = "ByCreditBuilder")
     public Refund(CreditCard creditCard, Order order) {
         Assert.notNull(creditCard, "creditCard must not be null");
         Assert.notNull(order, "order must not be null");

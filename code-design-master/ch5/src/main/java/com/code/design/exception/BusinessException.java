@@ -2,6 +2,11 @@ package com.code.design.exception;
 
 import com.code.design.ErrorCode;
 
+/*
+    # 최상위 내부 비즈니스 예외 클래스
+    - 통일감 있는 예외 처리
+    - 하나의 예외 핸들러로 처리 가능
+ */
 public class BusinessException extends RuntimeException {
 
     private ErrorCode errorCode;

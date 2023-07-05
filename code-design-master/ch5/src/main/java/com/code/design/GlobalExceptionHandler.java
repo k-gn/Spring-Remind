@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+/*
+    # 모든 예외를 처리할 핸들러
+ */
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
@@ -29,7 +32,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * @ModelAttribut 으로 binding error 발생시 BindException 발생한다.
+     * @ModelAttribute 으로 binding error 발생시 BindException 발생한다.
      * ref https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-ann-modelattrib-method-args
      */
     @ExceptionHandler(BindException.class)
@@ -43,7 +46,7 @@ public class GlobalExceptionHandler {
      * enum type 일치하지 않아 binding 못할 경우 발생
      * 주로 @RequestParam enum으로 binding 못했을 경우 발생
      */
-    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    @ExceptionHandler({MethodArgumentTypeMismatchException.class})
     protected ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(
         MethodArgumentTypeMismatchException e) {
         log.error("handleMethodArgumentTypeMismatchException", e);
@@ -80,7 +83,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.valueOf(errorCode.getStatus()));
     }
 
-
+    /*
+        모든 예외를 잡을 핸들러
+     */
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ErrorResponse> handleException(Exception e) {
         log.error("handleEntityNotFoundException", e);
