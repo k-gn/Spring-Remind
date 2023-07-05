@@ -46,6 +46,17 @@ public class ExpirePointStepConfig {
 			.build();
 	}
 
+	/*
+		1. 처리할 데이터 개수 > Page Size 인 경우
+		2. Reader 조건으로 사용되는 필드와 Processor 에서 수정하는 필드가 동일한 경우
+		=> 위 두 조건을 만족할 때 문제가 발생할 수 있다.
+			=> 페이지를 잘못 쪼개서 가져온다.
+
+		=> 순서를 거꾸로 뒤집어서 데이터를 가져오면 해결할 수 있다.
+
+		- Reader 조회 성능은 배치 성능에 가장 큰 영향을 미치는 것중 하나다.
+		=> 쿼리 성능이 중요하다. (쿼리 튜닝 or 인덱스)
+	 */
 	@Bean
 	@StepScope
 	public JpaPagingItemReader<Point> expirePointItemReader(
