@@ -23,6 +23,7 @@ public class MemberApiTest extends IntegrationTestSupport {
 
     @Test
     void 회원가입_테스트_객체기반으로_생성해야하는_단점_테스트_코드에서_밖에_사용_하지_않은_코드() throws Exception {
+        // 테스트 코드만을 위한 로직이 생기기 시작한다.
 //        final String requestBody = objectMapper.writeValueAsString(new SignUpRequest("yun"));
 //        this.mockMvc.perform(
 //                post("/members")

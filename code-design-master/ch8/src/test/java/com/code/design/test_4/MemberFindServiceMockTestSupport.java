@@ -12,7 +12,8 @@ import org.mockito.Mock;
 
 class MemberFindServiceMockTestSupport extends MockTestSupport {
 
-    // 외부 인프라
+    // 제어할 수 없는, 제어해선 안되는 외부 인프라인 경우에 Mocking
+    // 그 외에는 굳이?
     @InjectMocks
     private MemberFindService memberFindService;
 

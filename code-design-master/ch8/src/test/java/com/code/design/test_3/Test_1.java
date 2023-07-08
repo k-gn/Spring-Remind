@@ -21,6 +21,7 @@ public class Test_1 {
         this.memberRepository = memberRepository;
     }
 
+    // 테스트 코드간의 의존성을 없애고, 어떻게 목킹하고, 어떤 구조로 만들지 항상 고민해야한다.
     @Test
     public void member_save_test() {
         //given

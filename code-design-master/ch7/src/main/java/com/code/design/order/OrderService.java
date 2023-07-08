@@ -12,6 +12,7 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 public class OrderService {
 
     private final OrderRepository orderRepository;
+    // 스프링에서 제공하는 이벤트보단 외부 인프라(ex. 카프카)를 활용하는 게 더 좋다.
     private final ApplicationEventPublisher eventPublisher;
 //    private final CartService cartService;
 

@@ -13,7 +13,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @ActiveProfiles("test")
-@DataJpaTest
+@DataJpaTest // bean 을 최소화할 수 있다.
 public class RepositoryTest {
 
     private final MemberRepository memberRepository;
@@ -35,7 +35,7 @@ public class RepositoryTest {
     }
 
     @Test
-    @Sql("/member-set-up.sql")
+    @Sql("/member-set-up.sql") // bean 을 최소화할 수 있다.
     public void sql_test() {
         final List<Member> members = memberRepository.findAll();
         then(members).hasSize(7);

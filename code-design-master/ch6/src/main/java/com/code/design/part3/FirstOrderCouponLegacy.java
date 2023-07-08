@@ -12,18 +12,17 @@ public class FirstOrderCouponLegacy {
      *
      * 꼬치꼬치 캐묻고 있습니다.
      *
-     * 1. 개체간의 협력관계에서는 상대 객체에 대한 정보를 꼬치꼬치 묻지 않아합니다. 묻지말고 시켜라 ->
+     * 1. 개체간의 협력관계에서는 상대 객체에 대한 정보를 꼬치꼬치 묻지 않아야 합니다. 묻지말고 시켜라
      */
     public void apply(final long couponId) {
-
         if (canIssued()) {
             final CouponLegacy coupon = getCoupon(couponId);
 
-            if (LocalDate.now().isAfter(coupon.getExpirationDate())) {
+            if (LocalDate.now().isAfter(coupon.getExpirationDate())) { // 책임 위치가 적절한가?
                 throw new IllegalStateException("사용 기간이 만료된 쿠폰입니다.");
             }
 
-            if (coupon.isUsed()) {
+            if (coupon.isUsed()) { // 책임 위치가 적절한가?
                 throw new IllegalStateException("이미 사용한 쿠폰입니다.");
             }
         }

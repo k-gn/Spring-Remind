@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PRIVATE) // 필수값이 비어있는 객체 생성을 예방하기 위함
 public class SignUpRequest {
 
     @NotEmpty

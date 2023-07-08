@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class Junit5_2 {
 
     /**
@@ -18,12 +18,12 @@ public class Junit5_2 {
      */
 
     @BeforeAll
-    void beforeAll() {
+    static void beforeAll() {
         System.out.println("BeforeAll : 테스트 실행되기 이전 단 한 번만 실행");
     }
 
     @AfterAll
-    void afterAll() {
+    static void afterAll() {
         System.out.println("AfterAll : 테스트 실행되기 이전 단 한 번만 실행");
     }
 

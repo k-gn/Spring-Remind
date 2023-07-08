@@ -32,7 +32,7 @@ public class MemberFindServiceTest extends IntegrationTestSupport {
     }
 
     @AfterAll
-    void afterAll() {
+    static void afterAll() {
         final List<Member> members = memberRepository.findAll();
         System.out.println("=============");
         System.out.println("members size: " + members.size());

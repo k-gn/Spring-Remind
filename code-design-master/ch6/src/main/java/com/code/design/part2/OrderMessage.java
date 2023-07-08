@@ -7,6 +7,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.util.ObjectUtils;
 
+/*
+    - 주문 메시지에 대한 책임을 갖는다.
+ */
 public class OrderMessage {
 
     private String type;

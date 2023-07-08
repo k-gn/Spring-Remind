@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+// 조회 책임에 따른 분리
+// 서비스의 크기와 책임을 어떻게 명확하게? => 서비스 클래스를 행위 중심으로 만드는 걸 권장
+// 대체성이 없다면 굳이 인터페이스로 만들 필요가 없다.
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor

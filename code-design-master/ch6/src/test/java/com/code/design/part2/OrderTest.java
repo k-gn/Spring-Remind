@@ -14,14 +14,13 @@ class OrderTest {
         types.add(MessageType.KAKAO);
         types.add(MessageType.SMS);
 
-        // 1. Order 객체 생성시 주문에 대한 메시지 플랫폼의 책임을 온전히 OrderMessage에게 이관 했다
+        // 1. Order 객체 생성시 주문에 대한 메시지 플랫폼의 책임을 온전히 OrderMessage에게 이관
         final OrderMessage message = OrderMessage.of(types);
         final Order order = new Order(message);
 
-        // 2. 실제 데이터베이스에서는 "SMS,KAKAO,EMAL" 이런 평문자열로 저장되어 있지만
-        // 사용하는 곳에서는 데이터베이스에 평문자열로 저장되었는지 신경쓰지
-        // 않고 List객체로 안전하게 사용 할수 있다.
-        final OrderMessage orderMessage = order.getMessage();
+        // 2. 실제 데이터베이스에서는 "SMS,KAKAO,EMAIL" 이런 평문자열로 저장되어 있지만
+        // 사용하는 곳에서는 데이터베이스에 평문자열로 저장되었는지 신경쓰지 않고 List객체로 안전하게 사용 할수 있다.
+        final OrderMessage orderMessage = order.getMessage(); // Order 와 OrderMessage 간의 협력 관계
         final List<MessageType> messageTypes = orderMessage.getTypes();
 
         for (MessageType messageType : messageTypes) {

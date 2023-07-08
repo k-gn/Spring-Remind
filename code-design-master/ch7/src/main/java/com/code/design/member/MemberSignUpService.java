@@ -12,6 +12,8 @@ public class MemberSignUpService {
 
     private final MemberRepository memberRepository;
     private final CouponIssueService couponIssueService;
+
+    // 이벤트를 활용한 시스템 강결합 문제 해결
     //    private final EmailSenderService emailSenderService;
     private final ApplicationEventPublisher eventPublisher;
 

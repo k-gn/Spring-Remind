@@ -14,7 +14,7 @@ public class MemberEventHandler {
     private final EmailSenderService emailSenderService;
 
 //    @EventListener
-    @TransactionalEventListener
+    @TransactionalEventListener // 트랜잭션 커밋 후 동작하는 리스너
     public void memberSignedUpEventListener(MemberSignedUpEvent dto){
         emailSenderService.sendSignUpEmail(dto.getMember());
     }

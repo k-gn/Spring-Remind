@@ -23,14 +23,16 @@ import org.springframework.web.context.WebApplicationContext;
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-@TestInstance(Lifecycle.PER_CLASS)
+// @TestInstance(Lifecycle.PER_CLASS)
 @Transactional
 public class IntegrationTestSupport {
 
     @Autowired
     protected MockMvc mockMvc;
+
     @Autowired
     protected ObjectMapper objectMapper;
+
     @Autowired
     private ResourceLoader resourceLoader;
 

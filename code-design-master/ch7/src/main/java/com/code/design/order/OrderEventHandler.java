@@ -12,8 +12,9 @@ public class OrderEventHandler {
 
     private final CartService cartService;
 
-    @Async
+    @Async // 비동기 처리 -> 서로 다른 트랜잭션으로 분리되어 영향을 주지 않는다. + 응답속도 개선 / 단, 순서 보장은 안된다.
     @EventListener
+    // @Order()
     public void orderCompletedEventListener(OrderCompletedEvent event) {
         cartService.deleteCart(event.getOrder());
     }

@@ -7,6 +7,11 @@ import com.code.design.Coupon;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
+/*
+    # POJO (domain) Test
+        - 어떠한 의존관계도 없는 가장 쉽고 빠르며 간편한 테스트
+        - 도메인, 유틸클래스, 서비스 클래스는 최대한 POJO로 가능하도록 만들면 좋다.
+ */
 public class CouponTest {
 
     @Test
