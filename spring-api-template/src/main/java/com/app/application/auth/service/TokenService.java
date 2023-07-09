@@ -12,13 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class TokenService {
 
     private final MemberService memberService;
     private final TokenProvider tokenProvider;
 
+    @Transactional
     public AccessTokenResponse createAccessTokenByRefreshToken(String refreshToken) {
         tokenProvider.validateToken(refreshToken);
         Member member = memberService.findMemberByRefreshToken(refreshToken);

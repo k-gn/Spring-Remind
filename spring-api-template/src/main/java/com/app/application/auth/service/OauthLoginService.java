@@ -21,13 +21,13 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-@Transactional
 @RequiredArgsConstructor
 public class OauthLoginService {
 
 	private final MemberService memberService;
 	private final TokenProvider tokenProvider;
 
+	@Transactional
 	public OauthLogin.Response oauthLogin(
 		String accessToken,
 		MemberType memberType

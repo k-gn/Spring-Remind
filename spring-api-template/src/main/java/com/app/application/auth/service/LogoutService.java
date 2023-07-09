@@ -17,12 +17,12 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class LogoutService {
 
 	private final MemberService memberService;
 	private final TokenProvider tokenProvider;
 
+	@Transactional
 	public void logout(String accessToken) {
 		tokenProvider.validateToken(accessToken);
 

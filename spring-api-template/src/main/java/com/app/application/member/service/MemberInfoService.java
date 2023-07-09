@@ -10,11 +10,11 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class MemberInfoService {
 
 	private final MemberService memberService;
 
-	@Transactional(readOnly = true)
 	public MemberInfoResponse getMemberInfo(Long memberId) {
 		Member member = memberService.findMemberByMemberId(memberId);
 		return MemberInfoResponse.of(member);

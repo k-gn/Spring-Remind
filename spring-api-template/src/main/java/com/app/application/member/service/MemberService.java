@@ -16,12 +16,13 @@ import com.app.global.error.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService {
 
 	private final MemberJpaRepository memberJpaRepository;
 
+	@Transactional
 	public Member registerMember(Member member) {
 		validateDuplicateMember(member);
 		return memberJpaRepository.save(member);
@@ -34,12 +35,10 @@ public class MemberService {
 		}
 	}
 
-	@Transactional(readOnly = true)
 	public Optional<Member> findMemberByEmail(String email) {
 		return memberJpaRepository.findByEmail(email);
 	}
 
-	@Transactional(readOnly = true)
 	public Member findMemberByRefreshToken(String refreshToken) {
 		Member member = memberJpaRepository.findByRefreshToken(refreshToken)
 			.orElseThrow(() -> new AuthenticationException(ErrorCode.REFRESH_TOKEN_NOT_FOUND));
