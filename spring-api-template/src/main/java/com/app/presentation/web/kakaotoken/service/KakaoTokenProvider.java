@@ -1,10 +1,10 @@
-package com.app.web.kakaotoken.service;
+package com.app.presentation.web.kakaotoken.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.app.web.kakaotoken.client.KakaoTokenClient;
-import com.app.web.kakaotoken.dto.KakaoToken;
+import com.app.presentation.web.kakaotoken.client.KakaoTokenClient;
+import com.app.presentation.web.kakaotoken.dto.KakaoToken;
 
 import lombok.RequiredArgsConstructor;
 

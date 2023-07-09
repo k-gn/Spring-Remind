@@ -1,4 +1,4 @@
-package com.app.web.kakaotoken.dto;
+package com.app.presentation.web.kakaotoken.dto;
 
 import lombok.Builder;
 import lombok.Getter;

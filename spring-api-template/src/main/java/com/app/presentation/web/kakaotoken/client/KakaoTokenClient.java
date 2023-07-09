@@ -1,11 +1,11 @@
-package com.app.web.kakaotoken.client;
+package com.app.presentation.web.kakaotoken.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-import com.app.web.kakaotoken.dto.KakaoToken;
+import com.app.presentation.web.kakaotoken.dto.KakaoToken;
 
 @FeignClient(url = "https://kauth.kakao.com", name = "kakaoTokenClient")
 public interface KakaoTokenClient {

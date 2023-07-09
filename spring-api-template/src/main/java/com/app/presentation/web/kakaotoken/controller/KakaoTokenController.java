@@ -1,11 +1,11 @@
-package com.app.web.kakaotoken.controller;
+package com.app.presentation.web.kakaotoken.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.app.web.kakaotoken.dto.KakaoToken;
-import com.app.web.kakaotoken.service.KakaoTokenProvider;
+import com.app.presentation.web.kakaotoken.dto.KakaoToken;
+import com.app.presentation.web.kakaotoken.service.KakaoTokenProvider;
 
 import lombok.RequiredArgsConstructor;
 
